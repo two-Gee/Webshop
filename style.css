@@ -1,0 +1,9 @@
+@media (min-width:576px) {
+    .navigation{
+        flex-direction: column;
+    }
+}
+#navbarSupportedContent{
+    justify-content: center;
+    text-align: center;
+}
