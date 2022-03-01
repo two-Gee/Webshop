@@ -7,3 +7,18 @@
     justify-content: center;
     text-align: center;
 }
+
+.nomargin{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#welcome{
+    background-image: url('welcome.jpg');
+    backdrop-filter: blur();
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 91% 70%;
+
+}

@@ -1,6 +1,6 @@
 <?php
 // Testmodus aktivieren / deaktivieren
-	define ("TESTMODUS", true);
+const TESTMODUS = true;
 
 //Funktion zum Verbindungsaufbau
 	function db_connect()
@@ -8,12 +8,12 @@
 		$dbserver 	= "localhost";
 		$dbuser 	= "root";
 		$dbpasswort	= "";
-		$dbname 	= "christen_uf";	
+		$dbname 	= "webshop";
 		$dbconn 		= new mysqli($dbserver, $dbuser, $dbpasswort, $dbname);
 		if($dbconn->connect_error){
 			die("Connection failed:" .$dbconn->connect_error);
 		}
-		return $dbh;
+		return $dbconn;
 	}
 
 //Abfragefunktion mit Verbindungsaufbau
@@ -21,7 +21,7 @@
 	{
 		//if (TESTMODUS) {echo $sql;}
 		$dbconn=db_connect();
-		$result=%dbconn->query(%sql);
+		$result=$dbconn->query($sql);
 		db_close(dbconn);
 		return $result;
 	}
