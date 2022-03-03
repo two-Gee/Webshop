@@ -19,21 +19,22 @@ include 'navbar.php';
 <!-- Wilkommen Text -->
 <div class="container-fluid bg-light nomargin ">
     <div class="container bg-light">
-        <div ></div>
-      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center shadow">
-          <div id="welcome"></div>
-          <div class="col-md-10 p-lg-5 mx-auto my-3">
-              <h1 class="display-4 fw-normal">Willkommen bei juicyBurgers</h1>
-              <p class="lead fw-normal pb-3">Bei uns gibt es die besten Burger in ganz Fulda!</p>
-              <a class="btn btn-outline-success btn-lg" href="burger.php">Direkt zu den Burgern</a>
-          </div><div class="product-device shadow-sm d-none d-md-block"></div>
-          <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-      </div>
+        <div>
+            <div><img src="welcome.jpg" </div>
+          <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center shadow">
+              <div class="col-md-10 p-lg-5 mx-auto my-3">
+                  <h1 class="display-4 fw-normal">Willkommen bei juicyBurgers</h1>
+                  <p class="lead fw-normal pb-3">Bei uns gibt es die besten Burger in ganz Fulda!</p>
+                  <a class="btn btn-outline-success btn-lg" href="burger.php">Direkt zu den Burgern</a>
+              </div><div class="product-device shadow-sm d-none d-md-block"></div>
+              <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+          </div>
+        </div>
 
       <!-- Über uns -->
       <div class="container position-relative overflow-hidden text-center bg-light border-top">
           <h1 class="display-4 fw-normal">Über uns</h1>
-          <p class="display-10">Wir haben es uns zur Aufgabe gemacht beste Qualität und frische Zutaten mit einem fairen und bezahlbaren Preis zu vereinen</p>
+          <p class="display-10">Wir haben es uns zur Aufgabe gemacht, beste Qualität und frische Zutaten mit einem fairen und bezahlbaren Preis zu vereinen</p>
           <p class="display-10">Wir sehen uns als Gegenspieler der großen Fast Food Ketten und wir möchten Burger wieder in eine besseres Licht rücken</p>
           <div class="row d-md-flex flex-md-equal my-md-3">
               <div class="shadow col-sm pt-md-5 me-1  text-center  overflow-hidden">
