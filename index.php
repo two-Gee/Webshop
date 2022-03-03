@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['angemeldet']=false;
 ?>
 <!DOCTYPE html>
 <html lang="en">

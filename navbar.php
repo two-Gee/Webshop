@@ -44,13 +44,19 @@
                         <a class="nav-link" href="impressum.php">Impressum</a>
                     </li>
                 </ul>
-                <a class="float-right">
-                    <a  onclick="$('#myModal').modal(options)"  class="btn btn-dark btn-round" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <?php
+                    if($_SESSION['angemeldet']==false){
+                        echo "<a class='float-right'>
+                        <a  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Login
-                    </a>
-                </a>
+                        </a>
+                    </a>";
+                    }
+                ?>
+
             </div>
         </nav>
+
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -69,7 +75,7 @@
                                     <input type="email" class="form-control" name="email"placeholder="Your email address...">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="password" class="form-control" name="password1" placeholder="Your password...">
+                                    <input type="password" class="form-control" name="password" placeholder="Your password...">
                                 </div>
                                 <input type="submit" value="Login" class="btn bg-success float-end text-white w-100" name="login-btn">
                                 <!--<button type="button" class="btn btn-dark btn-block btn-round" id="btnclose"">Close</button>-->
@@ -82,9 +88,7 @@
                 </div>
             </div>
         </div>
-        <?php
 
-        ?>
         <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -100,11 +104,11 @@
                         <div class="d-flex flex-column text-center">
                             <form action="login.php" method="post">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="password1" placeholder="Vorname">
-                                    <input type="text" class="form-control" id="password1" placeholder="Nachname">
+                                    <input type="text" class="form-control" name="vorname" placeholder="Vorname">
+                                    <input type="text" class="form-control" name="nachname" placeholder="Nachname">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select class="form-select" id="inputGroupSelect01">
+                                    <select class="form-select" id="inputGroupSelect01" name="geschlecht">
                                         <option selected>Geschlecht</option>
                                         <option value="1">weiblich</option>
                                         <option value="2">männlich</option>
@@ -113,24 +117,24 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <label class="control-label pt-2 pe-2" for="date">Geburtsdatum: </label>
-                                    <input class="form-control" type="date"  id="date" name="date" placeholder="Geburtsdatum"/>
+                                    <input class="form-control" type="date"  id="date" name="geburtsdatum" placeholder="Geburtsdatum"/>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input class="form-control" placeholder="Straße" style="width: 70%">
-                                    <input class="form-control" placeholder="HausNr.">
+                                    <input class="form-control" name="straße" placeholder="Straße" style="width: 70%">
+                                    <input class="form-control" name="hausnr" placeholder="HausNr.">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" id="password1" placeholder="PLZ">
-                                    <input class="form-control" id="password1" placeholder="Ort">
+                                    <input type="number" class="form-control" name="plz" placeholder="PLZ">
+                                    <input class="form-control" name="ort" placeholder="Ort">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="email" class="form-control" id="email1"placeholder="IBAN">
+                                    <input type="text" class="form-control" name="iban"placeholder="IBAN">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="email" class="form-control" id="email1"placeholder="E-Mail Adresse">
+                                    <input type="email" class="form-control" name="email" placeholder="E-Mail Adresse">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="password" class="form-control" id="password1" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
 
                                 <input type="submit" value="Registrieren" class="btn bg-success float-end text-white w-100" name="login-btn">
