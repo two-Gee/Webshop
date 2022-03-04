@@ -1,3 +1,6 @@
+<?php
+
+?>
 <div class="container-fluid bg-dark rounded-bottom text-white text-center">
 
     <a style="font-size: 12px">Kostenloser Versand ab 15€!</a>
@@ -45,10 +48,17 @@
                     </li>
                 </ul>
                 <?php
-                    if($_SESSION['angemeldet']==false){
+                    if($_SESSION['angemeldet']==true){
+                        echo "<div class='float-right'>
+                         <i class='pe-4  h5  fa-solid fa-cart-shopping'></i>
+                        <i class='h5 fa-solid fa-user'></i>
+                        
+                    </div>";
+                    }else{
                         echo "<a class='float-right'>
+                        <i class='fa-solid fa-cart-shopping'></i>
                         <a  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
-                        Login
+                        Anmelden
                         </a>
                     </a>";
                     }

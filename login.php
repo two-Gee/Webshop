@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,12 +35,14 @@ if($_POST['login-btn']=='Login'){
         $row=$result->fetch_assoc();
         echo $_POST['password'], $row['Password'];
         if(password_verify($_POST['password'], $row['Password'])){
+            $_SESSION['ID'] = $row['kundenID'];
+            $_SESSION['angemeldet']=true;
+            setcookie("ID","",0);
             echo "<script> 
             alert('Erfolgreich angemeldet!'); 
             location.href='index.php'; 
             </script>";
-            $_SESSION['ID'] = $row['kundenID'];
-            $_SESSION['angemeldet']=true;
+
         }else{
             echo "<script> 
             alert('Falsche E-Mail Adresse oder falsche Password'); 

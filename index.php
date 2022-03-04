@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['angemeldet']=false;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@ include 'navbar.php';
 <div class="container-fluid bg-light nomargin ">
     <div class="container bg-light">
         <div>
-            <div><img src="welcome.jpg" </div>
+            <!--<div><img src="welcome.jpg" </div>-->
           <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center shadow">
               <div class="col-md-10 p-lg-5 mx-auto my-3">
                   <h1 class="display-4 fw-normal">Willkommen bei juicyBurgers</h1>
