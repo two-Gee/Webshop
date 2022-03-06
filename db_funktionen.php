@@ -22,7 +22,7 @@ const TESTMODUS = true;
 		//if (TESTMODUS) {echo $sql;}
 		$dbconn=db_connect();
 		$result=$dbconn->query($sql);
-		db_close(dbconn);
+		db_close($dbconn);
 		return $result;
 	}
 
@@ -31,7 +31,7 @@ const TESTMODUS = true;
 // Verbindungsabbau
 	function db_close($dbconn)
 	{
-		dbconn->close();
+		$dbconn->close();
 	}
 
 //Fehlerbehandlung

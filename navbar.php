@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 ?>
 <div class="container-fluid bg-dark rounded-bottom text-white text-center">
 
-    <a style="font-size: 12px">Kostenloser Versand ab 15€!</a>
+    <a style="font-size: 12px">Kostenlose Lieferung ab 15€!</a>
 </div>
 
 <!-- Navbar -->
@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light rounded border-bottom">
             <a class="navbar-brand" href="index.php">
                 <i class="fa-solid fa-burger"></i>
-                Burger
+                juicyBurger
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,111 +47,131 @@
                         <a class="nav-link" href="impressum.php">Impressum</a>
                     </li>
                 </ul>
+
+
+
                 <?php
-                    if($_SESSION['angemeldet']==true){
-                        echo "<div class='float-right'>
-                         <i class='pe-4  h5  fa-solid fa-cart-shopping'></i>
-                        <i class='h5 fa-solid fa-user'></i>
-                        
-                    </div>";
+                    if(isset($_SESSION['angemeldet'])){
+                        echo "
+                         <div class='pe-4  h5  fa-solid fa-cart-shopping'></div>
+                         <div class='dropdown'>
+                                <div class='dropdown-toggle'  id='navbarDropdown'  data-bs-toggle='dropdown'>
+                                    <i class='h5  solid - fa fa-user'></i>
+                                </div>
+                                <ul class='dropdown-menu text-center' aria-labelledby='navbarDropdown'>    
+                                    <li><a>Angemeldet</a></li>                       
+                                    <li><a>".$_SESSION['name']."</a></li>
+                                    <li class='px-2'><a>  " .$_SESSION['email']. " </a></li>
+                                    <li><hr class='dropdown-divider'></li>          
+                                    <li><a class='dropdown-item' href='profil.php'>Profil verwalten</a></li>     
+                                     <li><hr class='dropdown-divider'></li>         
+                                     <li><a class='dropdown-item' href='bestellungen.php'>Meine Bestellungen</a></li>     
+                                     <li><hr class='dropdown-divider'></li>       
+                                    <li><a class='dropdown-item' href='ausloggen.php'>Ausloggen</a></li>                                            
+                                </ul>
+                          </div>";
                     }else{
-                        echo "<a class='float-right'>
-                        <i class='fa-solid fa-cart-shopping'></i>
-                        <a  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
+                        echo "
+                        <i class='pe-4  h5  fa-solid fa-cart-shopping'></i>
+                        <div  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Anmelden
-                        </a>
-                    </a>";
+                        </div> ";
                     }
                 ?>
 
             </div>
         </nav>
 
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <button class="close btn btn-danger" type="button" id="btnclose1">
-                            <span aria-hidden="true">×</span>
+        <div class='modal fade' id='loginModal' tabindex=' -1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered' role='document'>
+                <div class='modal-content'>
+                    <div class='modal-header border-bottom-0'>
+                        <button class='close btn btn-danger' type='button' id='btnclose1'>
+                            <span aria-hidden='true'>×</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-title text-center mb-4">
+                    <div class='modal-body'>
+                        <div class='form-title text-center mb-4'>
                             <h4>Login</h4>
                         </div>
-                        <div class="d-flex flex-column text-center">
-                            <form action="login.php" method="post">
-                                <div class="form-group mb-3">
-                                    <input type="email" class="form-control" name="email"placeholder="Your email address...">
+                        <div class='d-flex flex-column text-center'>
+                            <form action='login.php' method='post'>
+                                <div class='form-group mb-3'>
+                                    <input type='email' class='form-control' name='email'placeholder='Your email address...'>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <input type="password" class="form-control" name="password" placeholder="Your password...">
+                                <div class='form-group mb-3'>
+                                    <input type='password' class='form-control' name='password' placeholder='Your password...'>
                                 </div>
-                                <input type="submit" value="Login" class="btn bg-success float-end text-white w-100" name="login-btn">
-                                <!--<button type="button" class="btn btn-dark btn-block btn-round" id="btnclose"">Close</button>-->
+                                <input type='submit' value='Login' class='btn bg-success float-end text-white w-100' name='login-btn'>
+                                <!--<button type='button' class='btn btn-dark btn-block btn-round' id='btnclose'' >Close</button>-->
                             </form>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <div class="signup-section">Noch kein Konto? <a class="blue" role="button" onclick="signUp()" > Registrieren</a>.</div>
+                    <div class='modal-footer d-flex justify-content-center' >
+                        <div class='signup-section' >Noch kein Konto? <a class='blue' role= 'button' onclick= 'signUp()' > Registrieren</a>.</div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <button class="close btn btn-danger" type="button" id="btnclose2">
-                            <span aria-hidden="true">×</span>
+<style>
+    .test1{
+        left:40% !important;
+        top:10% !important
+    }
+</style>
+        <div class='test1 modal fade' id= 'signUpModal' tabindex= '-1' role= 'dialog' aria-labelledby= 'exampleModalLabel' aria-hidden= 'true'>
+            <div class='modal-dialog modal-dialog-centered' role= 'document' >
+                <div class='modal-content' >
+                    <div class='modal-header border-bottom-0' >
+                        <button class='close btn btn-danger' type= 'button' id= 'btnclose2' >
+                            <span aria-hidden= 'true' >×</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-title text-center mb-4">
+                    <div class='modal-body' >
+                        <div class='form-title text-center mb-4' >
                             <h4>Login</h4>
                         </div>
-                        <div class="d-flex flex-column text-center">
-                            <form action="login.php" method="post">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="vorname" placeholder="Vorname">
-                                    <input type="text" class="form-control" name="nachname" placeholder="Nachname">
+                        <div class='d-flex flex-column text-center' >
+                            <form action= 'login.php' method= 'post' >
+                                <div class='input-group mb-3' >
+                                    <input type= 'text' class='form-control' name= 'vorname' placeholder= 'Vorname' >
+                                    <input type= 'text' class='form-control' name= 'nachname' placeholder= 'Nachname' >
                                 </div>
-                                <div class="input-group mb-3">
-                                    <select class="form-select" id="inputGroupSelect01" name="geschlecht">
+                                <div class='input-group mb-3' >
+                                    <select class='form-select' id= 'inputGroupSelect01' name= 'geschlecht' >
                                         <option selected>Geschlecht</option>
-                                        <option value="1">weiblich</option>
-                                        <option value="2">männlich</option>
-                                        <option value="3">divers</option>
+                                        <option value= '1' >weiblich</option>
+                                        <option value= '2' >männlich</option>
+                                        <option value= '3' >divers</option>
                                     </select>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <label class="control-label pt-2 pe-2" for="date">Geburtsdatum: </label>
-                                    <input class="form-control" type="date"  id="date" name="geburtsdatum" placeholder="Geburtsdatum"/>
+                                <div class='input-group mb-3' >
+                                    <label class='control-label pt-2 pe-2' for='date' >Geburtsdatum: </label>
+                                    <input class='form-control' type= 'date'  id= 'date' name= 'geburtsdatum' placeholder= 'Geburtsdatum' />
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input class="form-control" name="straße" placeholder="Straße" style="width: 70%">
-                                    <input class="form-control" name="hausnr" placeholder="HausNr.">
+                                <div class='input-group mb-3' >
+                                    <input class='form-control' name= 'straße' placeholder= 'Straße' style= 'width: 70%' >
+                                    <input class='form-control' name= 'hausnr' placeholder= 'HausNr.' >
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control" name="plz" placeholder="PLZ">
-                                    <input class="form-control" name="ort" placeholder="Ort">
+                                <div class='input-group mb-3' >
+                                    <input type= 'number' class='form-control' name= 'plz' placeholder= 'PLZ' >
+                                    <input class='form-control' name= 'ort' placeholder= 'Ort' >
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="iban"placeholder="IBAN">
+                                <div class='input-group mb-3' >
+                                    <input type= 'text' class='form-control' name= 'iban'placeholder= 'IBAN' >
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input type="email" class="form-control" name="email" placeholder="E-Mail Adresse">
+                                <div class='input-group mb-3' >
+                                    <input type= 'email' class='form-control' name= 'email' placeholder= 'E-Mail Adresse' >
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                <div class='input-group mb-3' >
+                                    <input type= 'password' class='form-control' name= 'password' placeholder= 'Password' >
                                 </div>
 
-                                <input type="submit" value="Registrieren" class="btn bg-success float-end text-white w-100" name="login-btn">
+                                <input type= 'submit' value= 'Registrieren' class='btn bg-success float-end text-white w-100' name= 'login-btn' >
                             </form>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex justify-content-center">
+                    <div class='modal-footer d-flex justify-content-center' >
                     </div>
                 </div>
             </div>
@@ -160,3 +180,10 @@
 </div>
 <?php
 ?>
+<script>
+    function signUp(){
+        $('#loginModal').modal('hide');
+        $(".modal-backdrop").remove();
+        $('#signUpModal').modal('show');
+    };
+</script>

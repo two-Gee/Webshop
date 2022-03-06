@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,44 +15,63 @@ session_start();
 <?php
 include 'navbar.php';
 ?>
+<style>
+    .wilkommenstext{
+        position: absolute;
+        left: 23%;
+        top: 40%;
+    }
+    .wilkommensbild{
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+        opacity:0.5;
+    }
+    .test{
+        background-color: black;
+    }
+</style>
 <!-- Wilkommen Text -->
 <div class="container-fluid bg-light nomargin ">
     <div class="container bg-light">
         <div>
             <!--<div><img src="welcome.jpg" </div>-->
-          <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center shadow">
-              <div class="col-md-10 p-lg-5 mx-auto my-3">
-                  <h1 class="display-4 fw-normal">Willkommen bei juicyBurgers</h1>
-                  <p class="lead fw-normal pb-3">Bei uns gibt es die besten Burger in ganz Fulda!</p>
-                  <a class="btn btn-outline-success btn-lg" href="burger.php">Direkt zu den Burgern</a>
-              </div><div class="product-device shadow-sm d-none d-md-block"></div>
-              <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+          <div class="test position-relative overflow-hidden text-center shadow my-4 rounded">
+              <div class="position-relative">
+              <div class="wilkommensbild">
+                  <img src="bilder/welcome.jpg" width="100%" height="auto">
+              </div>
+                  <div class="wilkommenstext text-light" >
+                      <h1 class="display-4 fw-normal">Willkommen bei juicyBurger</h1>
+                      <p class="lead fw-normal pb-3">Bei uns gibt es die besten Burger in ganz Fulda!</p>
+                      <a class="btn btn-success btn-lg" href="burger.php">Direkt zu den Burgern</a>
+                  </div>
+              </div>
           </div>
         </div>
 
       <!-- Über uns -->
-      <div class="container position-relative overflow-hidden text-center bg-light border-top">
+      <div class="container  overflow-hidden text-center bg-light border-top py-4">
           <h1 class="display-4 fw-normal">Über uns</h1>
           <p class="display-10">Wir haben es uns zur Aufgabe gemacht, beste Qualität und frische Zutaten mit einem fairen und bezahlbaren Preis zu vereinen</p>
           <p class="display-10">Wir sehen uns als Gegenspieler der großen Fast Food Ketten und wir möchten Burger wieder in eine besseres Licht rücken</p>
-          <div class="row d-md-flex flex-md-equal my-md-3">
-              <div class="shadow col-sm pt-md-5 me-1  text-center  overflow-hidden">
-                  <div class="my-3 py-3">
-                      <h2 class="display-5">Another headline</h2>
-                      <p class="lead">And an even wittier subheading.</p>
+          <div class="row">
+              <div class="col-sm shadow mt-3 me-1">
+                  <div class=" col-sm bg-light text-center overflow-hidden">
+                      <div class="my-3 p-3">
+                          <h2 class="display-5">Another headline</h2>
+                          <p class="lead">And an even wittier subheading.</p>
+                      </div>
                   </div>
-                  <div class="bg-dark shadow-sm mx-auto" style="width: 100%; height: 350px; border-radius: 21px 21px 0 0;">
-                      <img src="zutaten.jpg" height="413" width="620" style="border-radius: 21px 21px 0 0;">
-                  </div>
+                  <img src="bilder/zutaten.jpg" height=auto width="100%" style="border-radius: 21px 21px 21px 21px;">
               </div>
-              <div class="shadow col-sm bg-light pt-md-5 ms-1 text-center overflow-hidden">
-                  <div class="my-3 p-3">
-                      <h2 class="display-5">Another headline</h2>
-                      <p class="lead">And an even wittier subheading.</p>
+              <div class="col-sm shadow mt-3 ms-1">
+                  <div class=" col-sm bg-light text-center overflow-hidden">
+                      <div class="my-3 p-3">
+                          <h2 class="display-5">Another headline</h2>
+                          <p class="lead">And an even wittier subheading.</p>
+                      </div>
                   </div>
-                  <div class="bg-dark shadow-sm mx-auto" style="width: 100%; height: 413px; border-radius: 21px 21px 0 0;">
-                      <img src="kueche.jpg" height="413" width="620" style="border-radius: 21px 21px 0 0;">
-                  </div>
+                          <img src="bilder/kueche.jpg" height=auto width="100%" style="border-radius: 21px 21px 21px 21px;">
               </div>
           </div>
           <p class="display-6 pt-3"> Überzeugt?</p>
@@ -88,11 +105,7 @@ include 'navbar.php';
                 });
         });
     });
-    function signUp(){
-        $('#loginModal').modal('hide');
-        $(".modal-backdrop").remove();
-        $('#signUpModal').modal('show');
-    };
+
 </script>
 </body>
 </html>

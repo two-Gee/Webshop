@@ -35,8 +35,10 @@ if($_POST['login-btn']=='Login'){
         $row=$result->fetch_assoc();
         echo $_POST['password'], $row['Password'];
         if(password_verify($_POST['password'], $row['Password'])){
-            $_SESSION['ID'] = $row['kundenID'];
+            $_SESSION['kundenID'] = $row['kundenID'];
             $_SESSION['angemeldet']=true;
+            $_SESSION['name'] = $row['vorname']. ' ' .$row['nachname'];
+            $_SESSION['email'] = $row['EMail'];
             setcookie("ID","",0);
             echo "<script> 
             alert('Erfolgreich angemeldet!'); 
@@ -95,7 +97,9 @@ if($_POST['login-btn']=='Login'){
         $preparedStatement->close();
         $dbconn->close();
         $row=$result->fetch_assoc();
-        $_SESSION['ID'] = $row['kundenID'];
+        $_SESSION['kundenID'] = $row['kundenID'];
+        $_SESSION['name'] = $row['vorname']. ' ' .$row['nachname'];
+        $_SESSION['email'] = $row['email'];
 
         $_SESSION['angemeldet'] = true;
         echo "<script> alert('Erfolgreich hinzugefügt!'); location.href='index.php'; </script>";
