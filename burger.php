@@ -66,30 +66,25 @@ include ('navbar.php');
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $r=(db_query('Select * FROM kategorie WHERE kategorieID='.$row['kategorieID']))->fetch_assoc();
-
-                    echo "
-
-
-                          <div class='col'>";
-                    echo    "<div class='card'>
+                    echo   "<div class='col'>
+                                <div class='card'>
                                 <div class='bildcontainer'>
                                     <div class='produktbild'>      
                                         <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
                                      </div> 
                                      <div class='overlay text-center'>
                                                 <form action='einkaufswagenverwalten.php' method='post'>
-                                                    <input type='hidden' name='id' value='".$row['burgerID']."'>
+                                                    <input type='hidden' name='burgerID' value='".$row['burgerID']."'>
                                                     <input type='hidden' name='anzahl' value='1'>
                                                 <button type='submit' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
-                                                </form>
-                                                <a class='mb-3 btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</a>
+                                                </form>   
                                                 <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
                                       </div>
                                   </div>
                                 <div class='card-body'>
                                     <h5 class='card-title text-center'>".$row['bezeichnung']."</h5>
                                     <p class='card-title text-center'>Kategorie: ".$r['bezeichnung']."</p>
-                                    <p class='card-text pt-3' style='height: 80px'>".$row['beschreibung']."</p>
+                                    <p class='card-text text-center' style='height: 30px'>Preis ".$row['preis']." €</p>
                                 </div>
                               </div>
                             </div>";
@@ -112,16 +107,29 @@ include ('navbar.php');
             $result = db_query("Select * FROM burger WHERE kategorieID=" . $kategorie);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-
-                    echo "<div class='col'>";
-                    echo "<div class='card'>";
-                    echo "<img src='bilder/" . $row['bild'] . "' class='card-img-top' alt='...'>";
-                    echo "<div class='card-body'>";
-                    echo "<h5 class='card-title text-center'>" . $row['bezeichnung'] . "</h5>";
-                    echo "<p class='card-text pt-3' style='height: 80px'>" . $row['beschreibung'] . "</p>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
+                    $r=(db_query('Select * FROM kategorie WHERE kategorieID='.$row['kategorieID']))->fetch_assoc();
+                    echo   "<div class='col'>
+                                <div class='card'>
+                                <div class='bildcontainer'>
+                                    <div class='produktbild'>      
+                                        <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
+                                     </div> 
+                                     <div class='overlay text-center'>
+                                                <form action='einkaufswagenverwalten.php' method='post'>
+                                                    <input type='hidden' name='burgerID' value='".$row['burgerID']."'>
+                                                    <input type='hidden' name='anzahl' value='1'>
+                                                <button type='submit' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
+                                                </form>   
+                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
+                                      </div>
+                                  </div>
+                                <div class='card-body'>
+                                    <h5 class='card-title text-center'>".$row['bezeichnung']."</h5>
+                                    <p class='card-title text-center'>Kategorie: ".$row['bezeichnung']."</p>
+                                    <p class='card-text text-center' style='height: 30px'>Preis ".$row['preis']." €</p>
+                                </div>
+                              </div>
+                            </div>";
 
                 }
                 // Free result set

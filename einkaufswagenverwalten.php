@@ -23,13 +23,39 @@ if($_POST['anzahl']>0){
         if(isset($_SESSION['angemeldet'])) {
             $sql= "INSERT INTO einkaufswagen (kundenID, sessionID) VALUES ('".$_SESSION['kundenID']."', '".session_id()."') ";
             $dbconn->query($sql);
-            $_SESSION['einkaufswagenID']=mysqli_insert_id($dbconn);
+            $result=$dbconn->query("SELECT einkaufswagenID FROM einkaufswagen WHERE sessionID='".session_id()."'");
+            $row=$result->fetch_assoc();
+            $insID=$row['einkaufswagenID'];
+            echo $insID;
+            $_SESSION['einkaufswagenID']=$insID;
+            echo $_SESSION['einkaufswagenID'];
         }else{
             $sql= "INSERT INTO einkaufswagen (kundenID, sessionID) VALUES (null, '".session_id()."') ";
             $dbconn->query($sql);
-            $_SESSION['einkaufswagenID']=mysqli_insert_id($dbconn);
+            $result=$dbconn->query("SELECT einkaufswagenID FROM einkaufswagen WHERE sessionID='".session_id()."'");
+            $row=$result->fetch_assoc();
+            $insID=$row['einkaufswagenID'];
+            echo $insID;
+            $_SESSION['einkaufswagenID']=$insID;
+            echo $_SESSION['einkaufswagenID'];
         }
     }
+    echo "<script> 
+                alert('".$_SESSION['einkaufswagenID']."');    
+                </script>";
+    echo $_SESSION['einkaufswagenID'];
+    $sql = "INSERT INTO einkaufswageneintrag (burgerID, einkaufswagenID) VALUES (?,?)";
+    $preparedStatement = $dbconn->prepare($sql);
+    $preparedStatement->bind_param('ii', $_POST['burgerID'], $_SESSION['einkaufswagenID']);
+    if (!$preparedStatement->execute()) {
+        die($preparedStatement->error);
+    }
+    $result = $preparedStatement->get_result();
+    $preparedStatement->close();
+    echo "<script> 
+                alert('Zum Einkaufswagen hinzugefügt'); 
+                location.href='index.php'; 
+                </script>";
     /*
         $sql = "SELECT * FROM kunde WHERE EMail = ?";
 

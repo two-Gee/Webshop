@@ -53,8 +53,8 @@ session_start();
                 <?php
                     if(isset($_SESSION['angemeldet'])){
                         echo "
-                         <div class='pe-4  h5  fa-solid fa-cart-shopping'></div>
-                         <div class='dropdown'>
+                         
+                         <div class='dropdown me-4'>
                                 <div class='dropdown-toggle'  id='navbarDropdown'  data-bs-toggle='dropdown'>
                                     <i class='h5  solid - fa fa-user'></i>
                                 </div>
@@ -69,13 +69,17 @@ session_start();
                                      <li><hr class='dropdown-divider'></li>       
                                     <li><a class='dropdown-item' href='ausloggen.php'>Ausloggen</a></li>                                            
                                 </ul>
-                          </div>";
+                          </div>
+                          <a class='btn fa-solid fa-cart-shopping fa-2x' href='einkaufswagen.php'></a>";
                     }else{
                         echo "
-                        <i class='pe-4  h5  fa-solid fa-cart-shopping'></i>
+                        <a  href='ausloggen.php'  class='btn btn-dark btn-round me-3 '>
+                        neue Session
+                        </a> 
                         <div  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Anmelden
-                        </div> ";
+                        </div> 
+                        <a class='btn fa-solid fa-cart-shopping fa-2x' href='einkaufswagen.php'></a>";
                     }
                 ?>
 

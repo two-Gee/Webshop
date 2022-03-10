@@ -18,7 +18,7 @@ include 'navbar.php';
 <style>
     .wilkommenstext{
         position: absolute;
-        left: 23%;
+        left: 29%;
         top: 40%;
     }
     .wilkommensbild{
@@ -32,12 +32,12 @@ include 'navbar.php';
 </style>
 <!-- Wilkommen Text -->
 <div class="container-fluid bg-light nomargin ">
-    <div class="container bg-light">
+    <div class="container-fluid bg-light">
         <div>
             <!--<div><img src="welcome.jpg" </div>-->
           <div class="test position-relative overflow-hidden text-center shadow my-4 rounded">
               <div class="position-relative">
-              <div class="wilkommensbild">
+              <div class="container-fluid wilkommensbild">
                   <img src="bilder/welcome.jpg" width="100%" height="auto">
               </div>
                   <div class="wilkommenstext text-light" >
@@ -48,6 +48,8 @@ include 'navbar.php';
               </div>
           </div>
         </div>
+    </div>
+    <div class="container">
 
       <!-- Über uns -->
       <div class="container  overflow-hidden text-center bg-light border-top py-4">
