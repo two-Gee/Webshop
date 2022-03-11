@@ -37,8 +37,10 @@ include 'navbar.php';
                             <div class='col'>
                                 <p>" . $row['bezeichnung'] . "</p>
                             </div>
-                            <div class='col'>
-                                <p>Anzahl: ".$row['anzahl']."</p>
+                            <div class='col text-center pt-4'>
+                                <i>Anzahl:  ".$row['anzahl']." </i>
+                                <i class='fa-solid fa-plus'></i>
+                                <i class='fa-solid fa-minus'></i>
                             </div>
                          </div>
                         ";
