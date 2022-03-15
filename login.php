@@ -105,6 +105,18 @@ if($_POST['login-btn']=='Login'){
         echo "<script> alert('Erfolgreich hinzugefügt!'); location.href='index.php'; </script>";
     }
 }
+if(isset($_SESSION['einkaufswagenID'])){
+    $sql = "SELECT * FROM webshop.einkaufswagen AS e, webshop.einkaufswageneintrag AS ee WHERE e.einkaufswagenID=ee.einkaufswagenID AND e.kundenID='".$_SESSION['kundenID']."'";
+    $result=db_query($sql);
+    if($result->num_rows>0){
+        $sql = "UPDATE webshop.einkaufswageneintrag SET einkaufswagenID=".$row['einkaufswagenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
+        db_query($sql);
+        $_SESSION['einkaufswagenID']=$row['einkaufswagenID'];
+    }else{
+        $sql = "UPDATE webshop.einkaufswagen SET kundenID=".$_SESSION['kundenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
+        db_query($sql);
+    }
+}
 ?>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
