@@ -72,11 +72,8 @@ include ('navbar.php');
                                     <div class='produktbild'>      
                                         <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
                                      </div> 
-                                     <div class='overlay text-center'>
-                                                <form action='einkaufswagenverwalten.php' method='post'>
-                                                    <input type='hidden' name='burgerID' value='".$row['burgerID']."'>
-                                                    <input type='hidden' name='anzahl' value='1'>
-                                                <button type='submit' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
+                                     <div class='overlay text-center'>        
+                                                <button onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
                                                 </form>   
                                                 <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
                                       </div>
@@ -115,10 +112,7 @@ include ('navbar.php');
                                         <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
                                      </div> 
                                      <div class='overlay text-center'>
-                                                <form action='einkaufswagenverwalten.php' method='post'>
-                                                    <input type='hidden' name='burgerID' value='".$row['burgerID']."'>
-                                                    <input type='hidden' name='anzahl' value='1'>
-                                                <button type='submit' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
+                                                <button onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
                                                 </form>   
                                                 <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
                                       </div>
@@ -149,7 +143,14 @@ include "footer.php";
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    function burgerHinzufuegen(burgerID) {
+        var burgerID=burgerID;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "einkaufswagenverwalten.php");
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send("burgerID="+burgerID+"&anzahl=1");
 
+    }
 </script>
 </body>
 </html>

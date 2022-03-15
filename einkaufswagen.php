@@ -21,12 +21,12 @@ include 'navbar.php';
     <div class="container">
         <p class="h1 text-center mb-4">Einkaufswagen</p>
         <div class="row">
-            <div class='col'>
+            <div class='col-sm'>
             <?php
             include 'db_funktionen.php';
             $gesamtpreis=0.0;
                 if(isset($_SESSION['einkaufswagenID'])) {
-                    $result = db_query("SELECT b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.burgerID) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b WHERE e.burgerID=b.burgerID AND einkaufswagenID='".$_SESSION['einkaufswagenID']."' GROUP BY b.burgerID");
+                    $result = db_query("SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b WHERE e.burgerID=b.burgerID AND einkaufswagenID='".$_SESSION['einkaufswagenID']."' GROUP BY b.bezeichnung");
                     while ($row = $result->fetch_assoc()) {
                         $gesamtpreis=$gesamtpreis+$row['anzahl']*$row['preis'];
                         echo " 
@@ -34,13 +34,14 @@ include 'navbar.php';
                             <div class='col'>
                                 <img src='bilder/".$row['bild'] . "' width=70% height=auto>
                             </div>
-                            <div class='col'>
+                            <div class='col pt-4'>
                                 <p>" . $row['bezeichnung'] . "</p>
+                                <p>" . $row['preis']* $row['anzahl']." €</p>
                             </div>
                             <div class='col text-center pt-4'>
-                                <i>Anzahl:  ".$row['anzahl']." </i>
-                                <i class='fa-solid fa-plus'></i>
-                                <i class='fa-solid fa-minus'></i>
+                                <i>Anzahl: <i id='anzahl'>".$row['anzahl']."</i></i>
+                                <i class='btn fa-solid fa-plus' onclick='anzahlAendern(".$row['burgerID'].", 1)' ></i>
+                                <i class='btn fa-solid fa-minus' onclick='anzahlAendern(".$row['burgerID'].", -1)'></i>
                             </div>
                          </div>
                         ";
@@ -48,21 +49,32 @@ include 'navbar.php';
                 }else{
                     echo "<p class='text-center h3 py-5 my-5'>Noch keine Produkte im Einkaufswagen</p>";
             }
-                echo $gesamtpreis;
             ?>
             </div>
-            <div class="col">
-                <div class="text-center pb-3">
+            <div class="col-sm">
+                <div class="text-center pb-3 mt-4">
                     Gesamtpreis:
                     <?php
                     echo $gesamtpreis;
                     ?>
                      €
                 </div>
-                <div class="text-center pt-5">
-                    <button class="btn btn-lg btn-outline-success">Zur Kasse</button>
+                <?php
+                if(isset($_SESSION['angemeldet'])){
+                    echo "
+                    <div class='text-center pt-5'>
+                    <button class='btn btn-lg btn-outline-success'>Zur Kasse</button>
+                    </div>
+                    ";
+                }else{
+                    echo"
+                    <div class='text-center pt-5'>
+                    <p>Sie müssen sich erst anmelden, bevor Sie bezahlen können</p>
+                    </div>
+                    ";
+                }
+                ?>
 
-                </div>
             </div>
         </div>
 
@@ -78,7 +90,20 @@ include 'footer.php';
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script>
-
+    function anzahlAendern(id, anzahlHinzufuegen) {
+        var id=id;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "einkaufswagenverwalten.php");
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send("burgerID="+id+"&anzahl="+anzahlHinzufuegen);
+        var anzahl=parseInt(document.getElementById("anzahl").innerHTML);
+        var neueanzahl=anzahl+anzahlHinzufuegen;
+        if(neueanzahl<=0){
+            location.reload();
+        }else {
+            document.getElementById("anzahl").innerHTML = neueanzahl;
+        }
+    }
 </script>
 </body>
 </html>

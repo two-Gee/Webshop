@@ -42,13 +42,11 @@ if($_POST['login-btn']=='Login'){
             setcookie("ID","",0);
             echo "<script> 
             alert('Erfolgreich angemeldet!'); 
-            location.href='index.php'; 
             </script>";
 
         }else{
             echo "<script> 
             alert('Falsche E-Mail Adresse oder falsche Password'); 
-            location.href='index.php'; 
             </script>";
         }
     }
@@ -67,7 +65,6 @@ if($_POST['login-btn']=='Login'){
     if($result->num_rows > 0) {
         echo "<script> 
                 alert('Mit dieser E-Mail Adresse wurde bereits ein Konto erstellt'); 
-                location.href='index.php'; 
                 </script>";
     }else {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -102,13 +99,14 @@ if($_POST['login-btn']=='Login'){
         $_SESSION['email'] = $row['email'];
 
         $_SESSION['angemeldet'] = true;
-        echo "<script> alert('Erfolgreich hinzugefügt!'); location.href='index.php'; </script>";
+        echo "<script> alert('Erfolgreich hinzugefügt!'); </script>";
     }
 }
 if(isset($_SESSION['einkaufswagenID'])){
-    $sql = "SELECT * FROM webshop.einkaufswagen AS e, webshop.einkaufswageneintrag AS ee WHERE e.einkaufswagenID=ee.einkaufswagenID AND e.kundenID='".$_SESSION['kundenID']."'";
+    $sql = "SELECT * FROM webshop.einkaufswagen AS e WHERE e.kundenID='".$_SESSION['kundenID']."'";
     $result=db_query($sql);
     if($result->num_rows>0){
+        $row=$result->fetch_assoc();
         $sql = "UPDATE webshop.einkaufswageneintrag SET einkaufswagenID=".$row['einkaufswagenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
         db_query($sql);
         $_SESSION['einkaufswagenID']=$row['einkaufswagenID'];
@@ -116,7 +114,16 @@ if(isset($_SESSION['einkaufswagenID'])){
         $sql = "UPDATE webshop.einkaufswagen SET kundenID=".$_SESSION['kundenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
         db_query($sql);
     }
+}else {
+    $sql = "SELECT * FROM webshop.einkaufswagen WHERE kundenID=".$_SESSION['kundenID'];
+    $result = db_query($sql);
+    if ($result->num_rows > 0) {
+        $r = $result->fetch_assoc();
+        $_SESSION['einkaufswagenID'] = $r['einkaufswagenID'];
+        echo "<script> alert(".$_SESSION['einkaufswagenID'].");</script>";
+    }
 }
+echo "location.href='index.php';";
 ?>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
