@@ -73,9 +73,8 @@ include ('navbar.php');
                                         <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
                                      </div> 
                                      <div class='overlay text-center'>        
-                                                <button onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
-                                                </form>   
-                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
+                                                <a onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</a> 
+                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?burgerID=".$row['burgerID']."'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
                                       </div>
                                   </div>
                                 <div class='card-body'>
@@ -112,9 +111,8 @@ include ('navbar.php');
                                         <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
                                      </div> 
                                      <div class='overlay text-center'>
-                                                <button onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</button>
-                                                </form>   
-                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?id=1'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
+                                                <a onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</a>
+                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?burgerID=".$row['burgerID']."'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
                                       </div>
                                   </div>
                                 <div class='card-body'>

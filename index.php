@@ -18,13 +18,16 @@ include 'navbar.php';
 <style>
     .wilkommenstext{
         position: absolute;
-        left: 29%;
-        top: 40%;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
     }
     .wilkommensbild{
+        position: relative;
         -webkit-filter: blur(2px);
         filter: blur(2px);
-        opacity:0.5;
+        opacity:0.3;
     }
     .test{
         background-color: black;
@@ -36,11 +39,11 @@ include 'navbar.php';
         <div>
             <!--<div><img src="welcome.jpg" </div>-->
           <div class="test position-relative overflow-hidden text-center shadow my-4 rounded">
-              <div class="position-relative">
-              <div class="container-fluid wilkommensbild">
+              <div class="">
+                  <div class="container-fluid wilkommensbild">
                   <img src="bilder/welcome.jpg" width="100%" height="auto">
-              </div>
-                  <div class="wilkommenstext text-light" >
+                  </div>
+                  <div class="wilkommenstext text-light text-center" >
                       <h1 class="display-4 fw-normal">Willkommen bei juicyBurger</h1>
                       <p class="lead fw-normal pb-3">Bei uns gibt es die besten Burger in ganz Fulda!</p>
                       <a class="btn btn-success btn-lg" href="burger.php">Direkt zu den Burgern</a>
@@ -76,8 +79,10 @@ include 'navbar.php';
                           <img src="bilder/kueche.jpg" height=auto width="100%" style="border-radius: 21px 21px 21px 21px;">
               </div>
           </div>
-          <p class="display-6 pt-3"> Überzeugt?</p>
-          <a class="btn btn-outline-success btn-lg" href="burger.php">Zu den Burgern</a>
+          <div class="border-top border-bottom pb-2">
+              <p class="display-6 pt-3"> Überzeugt?</p>
+              <a class="btn btn-outline-success btn-lg" href="burger.php">Zu den Burgern</a>
+          </div>
       </div>
         <?php
             include 'footer.php';

@@ -29,7 +29,7 @@ session_start();
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="impressum.php">Über uns</a>
+                        <a class="nav-link" href="ueberuns.php">Über uns</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="burger.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
