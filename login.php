@@ -19,7 +19,9 @@ session_start();
 <?php
 include 'db_funktionen.php';
 $dbconn=db_connect();
-
+echo "<script> 
+            history.back(); 
+            </script>";
 if($_POST['login-btn']=='Login'){
     $sql = "SELECT * FROM kunde WHERE EMail = ?";
 
@@ -50,7 +52,6 @@ if($_POST['login-btn']=='Login'){
             </script>";
         }
     }
-
 }elseif ($_POST['login-btn']=='Registrieren'){
     $sql = "SELECT * FROM kunde WHERE EMail = ?";
 
@@ -120,10 +121,8 @@ if(isset($_SESSION['einkaufswagenID'])){
     if ($result->num_rows > 0) {
         $r = $result->fetch_assoc();
         $_SESSION['einkaufswagenID'] = $r['einkaufswagenID'];
-        echo "<script> alert(".$_SESSION['einkaufswagenID'].");</script>";
     }
 }
-echo "location.href='index.php';";
 ?>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

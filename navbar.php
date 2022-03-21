@@ -59,7 +59,7 @@ session_start();
                          
                          <div class='dropdown me-4'>
                                 <div class='dropdown-toggle'  id='navbarDropdown'  data-bs-toggle='dropdown'>
-                                    <i class='solid - fa fa-user fa-2x'></i>
+                                    <i class='solid - fa fa-user'></i>
                                 </div>
                                 <ul class='dropdown-menu text-center' aria-labelledby='navbarDropdown'>    
                                     <li><a>Angemeldet</a></li>                       
@@ -73,16 +73,16 @@ session_start();
                                     <li><a class='dropdown-item' href='ausloggen.php'>Ausloggen</a></li>                                            
                                 </ul>
                           </div>
-                          <a class='btn fa-solid fa-cart-shopping fa-2x' href='einkaufswagen.php'></a>";
+                          <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
             }else{
                 echo "
-                        <a  href='ausloggen.php'  class='btn btn-dark btn-round me-3 '>
+                        <a  href='ausloggen.php'  class='btn btn-dark btn-round me-3 btn-sm '>
                         neue Session
                         </a> 
-                        <div  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round' data-bs-toggle='modal' data-bs-target='#loginModal'>
+                        <div  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round btn-sm' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Anmelden
                         </div> 
-                        <a class='btn fa-solid fa-cart-shopping fa-2x' href='einkaufswagen.php'></a>";
+                        <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
             }
             ?>
         </nav>

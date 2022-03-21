@@ -1,3 +1,6 @@
+body{
+    font-family: 'Permanent Marker', cursive;
+}
 @media (min-width:576px) {
     .navigation{
         flex-direction: column;
