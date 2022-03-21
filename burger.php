@@ -64,7 +64,7 @@ include ('navbar.php');
 <div class ="container mt-4">
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <?php
-        if ($_GET['burger']=='alle'){
+        if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
             $_GET['burger']=null;
             $result=db_query("Select * FROM burger");
             if($result->num_rows > 0){

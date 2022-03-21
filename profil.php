@@ -33,7 +33,7 @@ include 'navbar.php';
                 <label for="nachname" class="form-label">Nachname</label>
                 <input type="text" class="form-control" id="nachname">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" id="geschlechtdiv">
                 <label for="geschlecht" class="form-label">Geschlecht</label>
                 <select id="geschlecht" class="form-select">
                     <option selected>Choose...</option>
@@ -95,7 +95,7 @@ include 'footer.php';
             document.getElementById("nachname").setAttribute("readonly", readonly);
             document.getElementById("vorname").setAttribute("readonly", readonly);
             document.getElementById("geschlecht").setAttribute("readonly", readonly);
-            document.getElementById("geburtsdatum").setAttribute("disabled", true)
+            document.getElementById("geburtsdatum").setAttribute("readonly", true)
             document.getElementById("straße").setAttribute("readonly", readonly);
             document.getElementById("hausnummer").setAttribute("readonly", readonly);
             document.getElementById("plz").setAttribute("readonly", readonly);
@@ -103,9 +103,9 @@ include 'footer.php';
             document.getElementById("email").setAttribute("readonly", readonly);
             document.getElementById("password").setAttribute("readonly", readonly);
         }else{
+
             document.getElementById("nachname").removeAttribute("readonly");
             document.getElementById("vorname").removeAttribute("readonly");
-            document.getElementById("geschlecht").removeAttribute("readonly");
             document.getElementById("geburtsdatum").removeAttribute("readonly");
             document.getElementById("straße").removeAttribute("readonly");
             document.getElementById("hausnummer").removeAttribute("readonly");

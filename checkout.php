@@ -31,8 +31,33 @@ session_start();
         }
     }
     ?>
+    <?php
+    $sql= 'SELECT * FROM webshop.kunde WHERE kundenID=' .$_SESSION['kundenID'];
+    $result=db_query($sql);
+    $r=$result->fetch_assoc();
+    ?>
                         <div class='row'>
-
+                            <div class="col-sm mt-5">
+                                <h5>Rechnungsadresse <i class="ms-1 fa-solid fa-user-pen" id="button" onclick="bearbeiten()"></i></h5>
+                                <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="straße" class="form-label">Straße</label>
+                                    <input type="text" class="form-control" id="straße" value="<?php echo $r['Straße'] ?>"readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="hausnummer" class="form-label">Hausnummer</label>
+                                    <input type="text" class="form-control" id="hausnummer" value="<?php echo $r['Hausnummer'] ?>"readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="plz" class="form-label">PLZ</label>
+                                    <input type="number" class="form-control" id="plz" placeholder="<?php echo $r['PLZ'] ?>"readonly>
+                                </div>
+                                <div class="col-12">
+                                    <label for="iban" class="form-label">IBAN</label>
+                                    <input type="text" class="form-control" id="iban" value="<?php echo $r['IBAN'] ?>"readonly>
+                                </div>
+                                </form>
+                            </div>
                             <div class='col-sm'>
                                 <div class="text-center border mt-5 shadow mx-5">
                                     <p>
@@ -66,52 +91,9 @@ session_start();
                                         </i>
                                         €</p>
                             </div>
-
                             </div>
 
 
-<div class="col-sm">
-<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
-    <div id="paypal-button" style="width: 50%"></div>
-
-
-<!-- Set up a container element for the button -->
-<div id="paypal-button-container"></div>
-
-<script>
-    paypal.Buttons({
-
-        // Sets up the transaction when a payment button is clicked
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
-                    }
-                }]
-            });
-        },
-
-        // Finalize the transaction after payer approval
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(orderData) {
-                // Successful capture! For dev/demo purposes:
-                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                var transaction = orderData.purchase_units[0].payments.captures[0];
-                alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-
-                // When ready to go live, remove the alert and show a success message within this page. For example:
-                // var element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '';
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
-            });
-        }
-    }).
-
-
-</script>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
