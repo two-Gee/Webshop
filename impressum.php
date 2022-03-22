@@ -19,7 +19,7 @@
 <?php
 include 'navbar.php';
 ?>
-<div class="container pt-5"
+<div class="container pt-5 impressum"
 
     <p><strong>Impressum</strong></p>
     <p>&nbsp;</p>
@@ -87,12 +87,12 @@ include 'navbar.php';
         Dritter werden als solche kenntlich gemacht. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam
         werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige
         Inhalte unverzüglich entfernen.</p>
-    <?php
-    include 'footer.php';
-    ?>
+
 </div>
 
-
+<?php
+include 'footer.php';
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

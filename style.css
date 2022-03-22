@@ -1,6 +1,9 @@
 body{
     font-family: 'Permanent Marker', cursive;
 }
+.impressum{
+    font-family: 'Lato' !important;
+}
 @media (min-width:576px) {
     .navigation{
         flex-direction: column;
@@ -15,5 +18,6 @@ body{
     margin: 0 !important;
     padding: 0 !important;
 }
+
 
 

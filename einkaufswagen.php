@@ -29,6 +29,7 @@ include 'navbar.php';
                     $result = db_query("SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b WHERE e.burgerID=b.burgerID AND einkaufswagenID='".$_SESSION['einkaufswagenID']."' GROUP BY b.bezeichnung");
                     while ($row = $result->fetch_assoc()) {
                         $gesamtpreis=$gesamtpreis+$row['anzahl']*$row['preis'];
+
                         echo " 
                         <div class='row border-bottom my-2 pb-2'>
                             <div class='col'>
@@ -45,6 +46,9 @@ include 'navbar.php';
                             </div>
                          </div>
                         ";
+                    }
+                    if($gesamtpreis==0){
+                        echo "<p class='text-center h3 py-5 my-5'>Noch keine Produkte im Einkaufswagen</p>";
                     }
                 }else{
                     echo "<p class='text-center h3 py-5 my-5'>Noch keine Produkte im Einkaufswagen</p>";
@@ -63,18 +67,25 @@ include 'navbar.php';
                 </div>
                 <?php
                 if(isset($_SESSION['angemeldet'])){
-                    echo "
+                    if($gesamtpreis==0){
+                        echo"
                     <div class='text-center pt-5'>
-                    <a class='btn btn-lg btn-outline-success' href='checkout.php'>Zur Kasse</a>
+                    <p>Sie müssen erst Produkte zum Warenkorb hinzufügen, bevor Sie bezahlen können</p>
                     </div>
-                    ";
-                }else{
-                    echo"
+                    ";}else{
+                            echo "
+                                <div class='text-center pt-5'>
+                                <a class='btn btn-lg btn-outline-success' href='checkout.php'>Zur Kasse</a>
+                                </div>
+                                ";
+                    }
+                    }else if(!isset($_SESSION['angemeldet'])){
+                        echo"
                     <div class='text-center pt-5'>
                     <p>Sie müssen sich erst anmelden, bevor Sie bezahlen können</p>
                     </div>
                     ";
-                }
+                    }
                 ?>
 
             </div>

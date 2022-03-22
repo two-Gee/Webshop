@@ -1,6 +1,10 @@
 <?php
 session_start();
 ?>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
 <div class="container-fluid bg-dark rounded-bottom text-white text-center">
 
     <a style="font-size: 12px">Kostenlose Lieferung ab 15€!</a>
