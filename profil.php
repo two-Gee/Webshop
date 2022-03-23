@@ -17,60 +17,62 @@
 <body class="bg-light">
 <?php
 include 'navbar.php';
+include 'db_funktionen.php';
+$sql= 'SELECT * FROM webshop.kunde WHERE kundenID=' .$_SESSION['kundenID'];
+$result=db_query($sql);
+$r=$result->fetch_assoc();
 ?>
 <div class="container">
-    <div class="pt-3">
+    <div class="py-3">
         <div class='text-center mb-4' >
             <h4>Profil</h4>
         </div>
-        <h6 class="my-3 mt-4">Profil Daten:</h6>
-        <form class="row g-3">
+        <h5 class="my-3 mt-4">Persönliche Daten: <i class="ms-1 fa-solid fa-user-pen" id="button" onclick="bearbeiten()"></i></h5>
+        <form class="row g-3" action="profilAktualisieren.php" method="post">
             <div class="col-md-6">
                 <label for="vorname" class="form-label">Vorname</label>
-                <input type="text" class="form-control" id="vorname" value="test">
+                <input type="text" name="vorname" class="form-control" id="vorname" value="<?php echo $r['vorname'] ?>" readonly >
             </div>
             <div class="col-md-6">
                 <label for="nachname" class="form-label">Nachname</label>
-                <input type="text" class="form-control" id="nachname">
+                <input type="text" class="form-control" name="nachname" id="nachname" value="<?php echo $r['nachname'] ?>" readonly >
             </div>
             <div class="col-md-6" id="geschlechtdiv">
-                <label for="geschlecht" class="form-label">Geschlecht</label>
-                <select id="geschlecht" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>Männlich</option>
-                </select>
+                <label for='geburtsdatum1' class='form-label'>Geschlecht</label><input type='text' class='form-control' id='nachname' value='<?php echo $r['geschlecht'] ?>' readonly >
             </div>
             <div class="col-md-6">
                 <label for="geburtsdatum" class="form-label">Geburtsdatum</label>
-                <input type="date" class="form-control" id="geburtsdatum">
+                <input type="date" class="form-control" id="geburtsdatum" value="<?php echo $r['geburtsdatum'] ?>" readonly>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <label for="straße" class="form-label">Straße</label>
-                <input type="text" class="form-control" id="straße" placeholder="1234 Main St">
+                <input type="text" name="straße" class="form-control" id="straße" value="<?php echo $r['Straße'] ?>"readonly>
             </div>
             <div class="col-md-3">
                 <label for="hausnummer" class="form-label">Hausnummer</label>
-                <input type="text" class="form-control" id="hausnummer" placeholder="1">
+                <input type="text" name="hausnummer" class="form-control" id="hausnummer" value="<?php echo $r['Hausnummer'] ?>"readonly>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <label for="plz" class="form-label">PLZ</label>
-                <input type="number" class="form-control" id="plz" placeholder="1">
+                <input type="number" name="plz" class="form-control" id="plz" value="<?php echo $r['PLZ'] ?>"readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="ort" class="form-label">Ort</label>
+                <input type="text" name="ort" class="form-control" id="ort" value="<?php echo $r['Ort'] ?> "readonly>
             </div>
             <div class="col-12">
                 <label for="iban" class="form-label">IBAN</label>
-                <input type="text" class="form-control" id="iban" placeholder="">
+                <input type="text" name="iban" class="form-control" id="iban" value="<?php echo $r['IBAN'] ?>"readonly>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" name="email" class="form-control" id="email" value="<?php echo $r['EMail'] ?>"readonly>
             </div>
             <div class="col-md-6">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" name="password" class="form-control" id="password" readonly>
             </div>
-            <div class="col-12 text-center">
-                <i class="ms-1 fa-solid fa-user-pen fa-2x" id="button" onclick="bearbeiten()"></i>
-            </div>
+            <div id="buttonaendern"></div>
         </form>
     </div>
 </div>
@@ -94,25 +96,31 @@ include 'footer.php';
             readonly=true;
             document.getElementById("nachname").setAttribute("readonly", readonly);
             document.getElementById("vorname").setAttribute("readonly", readonly);
-            document.getElementById("geschlecht").setAttribute("readonly", readonly);
             document.getElementById("geburtsdatum").setAttribute("readonly", true)
             document.getElementById("straße").setAttribute("readonly", readonly);
+            document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><input type='text' class='form-control' id='geschlecht' value='<?php echo $r['geschlecht'] ?>' readonly >";
             document.getElementById("hausnummer").setAttribute("readonly", readonly);
             document.getElementById("plz").setAttribute("readonly", readonly);
             document.getElementById("iban").setAttribute("readonly", readonly);
             document.getElementById("email").setAttribute("readonly", readonly);
+            document.getElementById("ort").setAttribute("readonly", readonly);
             document.getElementById("password").setAttribute("readonly", readonly);
+            document.getElementById("buttonaendern").innerHTML="";
         }else{
 
             document.getElementById("nachname").removeAttribute("readonly");
             document.getElementById("vorname").removeAttribute("readonly");
             document.getElementById("geburtsdatum").removeAttribute("readonly");
             document.getElementById("straße").removeAttribute("readonly");
+            document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='1'>Männlich</option> <option value='1'>Divers</option> </select>";
             document.getElementById("hausnummer").removeAttribute("readonly");
             document.getElementById("plz").removeAttribute("readonly");
             document.getElementById("iban").removeAttribute("readonly");
+            document.getElementById("ort").removeAttribute("readonly");
             document.getElementById("email").removeAttribute("readonly");
             document.getElementById("password").removeAttribute("readonly");
+            document.getElementById("buttonaendern").innerHTML="<input type='submit' value='Daten aktualisieren' class='btn bg-success float-end text-white w-100' name='aendern'>";
+
         }
     }
 

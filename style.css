@@ -1,5 +1,5 @@
 body{
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Anton', sans-serif;
 }
 .impressum{
     font-family: 'Lato' !important;
@@ -8,10 +8,6 @@ body{
     .navigation{
         flex-direction: column;
     }
-}
-#navbarSupportedContent{
-    justify-content: center;
-    text-align: center;
 }
 
 .nomargin{

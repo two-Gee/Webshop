@@ -23,14 +23,33 @@ include 'navbar.php';
     include 'db_funktionen.php';
     $sql="SELECT * FROM webshop.rechnung WHERE kundenID=".$_SESSION['kundenID']." ORDER BY datum DESC, uhrzeit DESC";
     $result=db_query($sql);
+
     while($row=$result->fetch_assoc()){
+        $gesamtpreis=0.0;
+        $sql1="SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b, webshop.rechnung AS r WHERE r.einkaufswagenID=e.einkaufswagenID AND e.burgerID=b.burgerID AND r.rechnungsID='".$row['rechnungsID']."' GROUP BY b.bezeichnung";
+        $result1 = db_query($sql1);
         echo"
-        <div class='row'>
+        <div class='row border my-3 shadow rounded'>
         <div class='col'>
-        <p>".$row['datum']."</p>
+        <p>".$row['datum']." ".$row['uhrzeit']."</p>
         </div>
         <div class='col'>
-        <p>".$row['uhrzeit']."</p>
+        ";
+        while($row1=$result1->fetch_assoc()){
+            $gesamtpreis=$gesamtpreis+$row1['anzahl']*$row1['preis'];
+            echo "
+            <p>".$row1['anzahl']." x ".$row1['bezeichnung']."</p>
+            ";
+        };
+        echo "
+        </div>
+        <div class='col'>
+            <p>Gesamtpreis: ".$gesamtpreis." €</p>    
+        </div>
+        <div class='col'>
+            <p>Lieferadresse:</p>
+            <p>".$row['vornamel']." ".$row['nachnamel']."</p>
+            <p>".$row['straßel']." ".$row['hausnummerl']." ".$row['plzl']." ".$row['ortl']."</p>
         </div>
         </div>
         ";

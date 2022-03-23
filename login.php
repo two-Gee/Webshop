@@ -19,9 +19,7 @@ session_start();
 <?php
 include 'db_funktionen.php';
 $dbconn=db_connect();
-echo "<script> 
-            history.back(); 
-            </script>";
+
 if($_POST['login-btn']=='Login'){
     $sql = "SELECT * FROM kunde WHERE EMail = ?";
 
@@ -35,13 +33,11 @@ if($_POST['login-btn']=='Login'){
     $preparedStatement->close();
     if($result->num_rows > 0){
         $row=$result->fetch_assoc();
-        echo $_POST['password'], $row['Password'];
         if(password_verify($_POST['password'], $row['Password'])){
             $_SESSION['kundenID'] = $row['kundenID'];
             $_SESSION['angemeldet']=true;
             $_SESSION['name'] = $row['vorname']. ' ' .$row['nachname'];
             $_SESSION['email'] = $row['EMail'];
-            setcookie("ID","",0);
             echo "<script> 
             alert('Erfolgreich angemeldet!'); 
             </script>";
@@ -103,26 +99,31 @@ if($_POST['login-btn']=='Login'){
         echo "<script> alert('Erfolgreich hinzugefügt!'); </script>";
     }
 }
-if(isset($_SESSION['einkaufswagenID'])){
-    $sql = "SELECT * FROM webshop.einkaufswagen AS e WHERE e.kundenID='".$_SESSION['kundenID']."'";
-    $result=db_query($sql);
-    if($result->num_rows>0){
-        $row=$result->fetch_assoc();
-        $sql = "UPDATE webshop.einkaufswageneintrag SET einkaufswagenID=".$row['einkaufswagenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
-        db_query($sql);
-        $_SESSION['einkaufswagenID']=$row['einkaufswagenID'];
-    }else{
-        $sql = "UPDATE webshop.einkaufswagen SET kundenID=".$_SESSION['kundenID']." WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
-        db_query($sql);
-    }
-}else {
-    $sql = "SELECT * FROM webshop.einkaufswagen WHERE kundenID=".$_SESSION['kundenID'];
-    $result = db_query($sql);
-    if ($result->num_rows > 0) {
-        $r = $result->fetch_assoc();
-        $_SESSION['einkaufswagenID'] = $r['einkaufswagenID'];
+if(isset($_SESSION['kundenID'])) {
+    if (isset($_SESSION['einkaufswagenID']) and isset($_SESSION['kundenID'])) {
+        $sql = "SELECT * FROM webshop.einkaufswagen AS e WHERE e.kundenID='" . $_SESSION['kundenID'] . "'";
+        $result = db_query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $sql = "UPDATE webshop.einkaufswageneintrag SET einkaufswagenID=" . $row['einkaufswagenID'] . " WHERE einkaufswagenID=" . $_SESSION['einkaufswagenID'];
+            db_query($sql);
+            $_SESSION['einkaufswagenID'] = $row['einkaufswagenID'];
+        } else {
+            $sql = "UPDATE webshop.einkaufswagen SET kundenID=" . $_SESSION['kundenID'] . " WHERE einkaufswagenID=" . $_SESSION['einkaufswagenID'];
+            db_query($sql);
+        }
+    } else {
+        $sql = "SELECT * FROM webshop.einkaufswagen WHERE kundenID=" . $_SESSION['kundenID'];
+        $result = db_query($sql);
+        if ($result->num_rows > 0) {
+            $r = $result->fetch_assoc();
+            $_SESSION['einkaufswagenID'] = $r['einkaufswagenID'];
+        }
     }
 }
+echo "<script> 
+            history.back(); 
+            </script>";
 ?>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

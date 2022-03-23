@@ -13,7 +13,9 @@ if(isset($_SESSION)){
     echo $time;
     $preparedStatement->bind_param("iissssssss", $_SESSION['einkaufswagenID'], $_SESSION['kundenID'], $_POST['vornamel'], $_POST['nachnamel'], $_POST['straßel'], $_POST['hausnummerl'], $_POST['plzl'], $_POST['ortl'], $date, $time);
     $preparedStatement->execute();
-    $sql="DELETE FROM webshop.einkaufswageneintrag WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
+    $sql="UPDATE webshop.einkaufswagen SET kundenID=null, sessionID=null WHERE einkaufswagenID=".$_SESSION['einkaufswagenID'];
+    $_SESSION['einkaufswagenID']=null;
+
     db_query($sql);
     echo "<script>alert('Bestellung wurde erfolgreich aufgegeben'); location.href='index.php';</script>";
 }else{
