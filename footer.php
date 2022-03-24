@@ -12,17 +12,23 @@
             <p>36043 Fulda</p>
         </div>
         <div class="col-sm text-center">
+            <h5 class="pb-2">Kontakt: </h5>
+            <p>Gerrit Grätz</p>
+            <p>juicyburger@gmail.com</p>
+            <p>01573 5562972</p>
+        </div>
+        <div class="col-sm text-center">
             <h5 class="pb-2">Zahlungsmöglichkeiten: </h5>
             <i class="fa-brands fa-cc-visa fa-4x"></i>
             <i class="fa-brands fa-cc-mastercard fa-4x"></i>
         </div>
+
     </div>
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Home</a></li>
             <li class="nav-item"><a href="ueberuns.php" class="nav-link px-2 text-muted">Über uns</a></li>
             <li class="nav-item"><a href="impressum.php" class="nav-link px-2 text-muted">Impressum</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
         </ul>
         <p class="text-center text-muted">© 2022 juicyBurger </p>
     </footer>

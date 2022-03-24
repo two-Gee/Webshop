@@ -35,7 +35,7 @@ session_start();
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
@@ -64,8 +64,16 @@ session_start();
 
 
             </div>
+
             <?php
             if(isset($_SESSION['angemeldet'])){
+                if(isset($_SESSION['admin'])){
+                    echo"
+                        <a  href='admin.php'  class='btn btn-outline-dark btn-round me-3'>
+                        Admin
+                        </a> 
+                    ";
+                }
                 echo "
                          
                          <div class='dropdown me-4'>
@@ -87,18 +95,28 @@ session_start();
                           <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
             }else{
                 echo "
-                        <a  href='ausloggen.php'  class='btn btn-dark btn-round me-3 btn-sm '>
+                        <a  href='ausloggen.php'  class='btn btn-outline-dark btn-round me-3 btn-sm '>
                         neue Session
                         </a> 
-                        <div  onclick='$('#myModal').modal(options)'  class='btn btn-dark btn-round btn-sm' data-bs-toggle='modal' data-bs-target='#loginModal'>
+                        <div  onclick='$('#myModal').modal(options)'  class='btn btn-outline-dark btn-round btn-sm' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Anmelden
                         </div> 
                         <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
             }
             ?>
         </nav>
-
-
+        <style>
+            .searchbar {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+        <div class="searchbar">
+        <form class="d-flex" action="burgersuchen.php" method="get" style="width: 70%">
+            <input class="form-control me-2" type="search" name="suchbegriff" placeholder="Burger suchen" aria-label="Search">
+            <button class="btn btn-outline-dark btn-sm" type="submit">suchen</button>
+        </form>
+        </div>
         <div class='modal fade' id='loginModal' tabindex=' -1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered' role='document'>
                 <div class='modal-content'>
@@ -131,10 +149,7 @@ session_start();
             </div>
         </div>
 <style>
-    .test1{
-        left:40% !important;
-        top:10% !important
-    }
+
 </style>
         <div class='test1 modal fade' id= 'signUpModal' tabindex= '-1' role= 'dialog' aria-labelledby= 'exampleModalLabel' aria-hidden= 'true'>
             <div class='modal-dialog modal-dialog-centered' role= 'document' >
@@ -195,6 +210,8 @@ session_start();
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script>
     function signUp(){
         $('#loginModal').modal('hide');

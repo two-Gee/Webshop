@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,37 +19,12 @@
 <?php
 include ('navbar.php');
 include 'db_funktionen.php';
-if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
-
-}elseif($_GET['burger']=='beef' OR$_GET['burger']=='chicken'OR $_GET['burger']=='veggie'){
-    $kategorie = 0;
-            if ($_GET['burger'] == 'beef') {
-                $kategorie = 1;
-            }
-            if ($_GET['burger'] == 'chicken') {
-                $kategorie = 2;
-            }
-            if ($_GET['burger'] == 'veggie') {
-                $kategorie = 3;
-            }
-    $result = db_query("Select * FROM webshop.kategorie WHERE kategorieID=".$kategorie);
-            $r=$result->fetch_assoc();
-            echo"
-            <div class='text-center py-4'>
-            <h5>".$r['bezeichnung']."</h5>
-            <p>".$r['beschreibung']."</p>
-            </div>
-            
-            ";
-}
 ?>
 
 <div class ="container mt-4">
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <?php
-        if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
-            $_GET['burger']=null;
-            $result=db_query("Select * FROM burger");
+            $result=db_query("Select * FROM burger WHERE LOWER(bezeichnung) LIKE LOWER('%".$_GET['suchbegriff']."%')");
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $r=(db_query('Select * FROM kategorie WHERE kategorieID='.$row['kategorieID']))->fetch_assoc();
@@ -76,45 +51,8 @@ if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
                 // Free result set
                 $result->free_result();
             } else{
-                echo "No records matching your query were found.";
+                echo "Keine Burger gefunden, die zu Ihrer suche passen";
             }
-        }elseif($_GET['burger']=='beef' OR$_GET['burger']=='chicken'OR $_GET['burger']=='veggie') {
-
-            $_GET['burger']=null;
-            $result = db_query("Select * FROM burger WHERE kategorieID=" . $kategorie);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $r=(db_query('Select * FROM kategorie WHERE kategorieID='.$row['kategorieID']))->fetch_assoc();
-                    echo   "
-                            <div class='col'>
-                                <div class='card'>
-                                <div class='bildcontainer'>
-                                    <div class='produktbild'>      
-                                        <img src='bilder/".$row['bild']."' class='card-img-top' alt='...'>
-                                     </div> 
-                                     <div class='overlay text-center'>
-                                                <a onclick='burgerHinzufuegen(".$row['burgerID'].")' class='mb-3 btn btn-outline-dark btn-sm'><i class='h5  fa-solid fa-cart-shopping'></i> Zum Einkaufswagen hinzufügen</a>
-                                                <a class='btn btn-outline-dark btn-sm' href='burgerdetails.php?burgerID=".$row['burgerID']."'><i class='h5 fa-solid fa-info'></i> Produktdetails ansehen</a> 
-                                      </div>
-                                  </div>
-                                <div class='card-body'>
-                                    <h5 class='card-title text-center'>".$row['bezeichnung']."</h5>
-                                    <p class='card-title text-center'>Kategorie: ".$r['bezeichnung']."</p>
-                                    <p class='card-text text-center' style='height: 30px'>Preis ".$row['preis']." €</p>
-                                </div>
-                              </div>
-                            </div>";
-
-                }
-                // Free result set
-                $result->free_result();
-            } else {
-                echo "No records matching your query were found.";
-            }
-        }else{
-            echo "<script>alert('Ungültige Kategorie')</script>";
-            echo "<script>history.back()</script>";
-        }
         ?>
     </div>
 </div>

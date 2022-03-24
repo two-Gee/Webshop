@@ -42,7 +42,7 @@ $r=$result->fetch_assoc();
             </div>
             <div class="col-md-6">
                 <label for="geburtsdatum" class="form-label">Geburtsdatum</label>
-                <input type="date" class="form-control" id="geburtsdatum" value="<?php echo $r['geburtsdatum'] ?>" readonly>
+                <input type="date" name="geburtsdatum" class="form-control" id="geburtsdatum" value="<?php echo $r['geburtsdatum'] ?>" readonly>
             </div>
             <div class="col-md-9">
                 <label for="straße" class="form-label">Straße</label>
@@ -88,7 +88,7 @@ include 'footer.php';
         crossorigin="anonymous"></script>
 
 <script>
-
+//Funktion um Textfelder entwerder readonly zu haben oder bearbeiten zu können
     function bearbeiten(){
         let test=document.getElementById("vorname").getAttribute("readonly");
         var readonly=false;
@@ -112,7 +112,7 @@ include 'footer.php';
             document.getElementById("vorname").removeAttribute("readonly");
             document.getElementById("geburtsdatum").removeAttribute("readonly");
             document.getElementById("straße").removeAttribute("readonly");
-            document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='1'>Männlich</option> <option value='1'>Divers</option> </select>";
+            document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='2'>Männlich</option> <option value='3'>Divers</option> </select>";
             document.getElementById("hausnummer").removeAttribute("readonly");
             document.getElementById("plz").removeAttribute("readonly");
             document.getElementById("iban").removeAttribute("readonly");
