@@ -6,8 +6,8 @@ const TESTMODUS = true;
 	function db_connect()
 	{
 		$dbserver 	= "localhost";
-		$dbuser 	= "root";
-		$dbpasswort	= "";
+		$dbuser 	= "webshop_user";
+		$dbpasswort	= "webshop#43";
 		$dbname 	= "webshop";
 		$dbconn 		= new mysqli($dbserver, $dbuser, $dbpasswort, $dbname);
 		if($dbconn->connect_error){
