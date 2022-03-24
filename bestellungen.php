@@ -23,7 +23,9 @@ include 'navbar.php';
     include 'db_funktionen.php';
     $sql="SELECT * FROM webshop.rechnung WHERE kundenID=".$_SESSION['kundenID']." ORDER BY datum DESC, uhrzeit DESC";
     $result=db_query($sql);
-
+    if($result->num_rows<1){
+        echo "<h5 class='text-center'>Noch keine Bestellungen getätigt</h5>";
+    }
     while($row=$result->fetch_assoc()){
         $gesamtpreis=0.0;
         $sql1="SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b, webshop.rechnung AS r WHERE r.einkaufswagenID=e.einkaufswagenID AND e.burgerID=b.burgerID AND r.rechnungsID='".$row['rechnungsID']."' GROUP BY b.bezeichnung";

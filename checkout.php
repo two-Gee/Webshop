@@ -62,7 +62,7 @@ session_start();
                                 </div>
                                     <div class="col-md-6">
                                         <label for="ort" class="form-label">Ort</label>
-                                        <input type="number" class="form-control" id="ort" value="<?php echo $r['Ort'] ?>"readonly>
+                                        <input type="text" class="form-control" id="ort" value="<?php echo $r['Ort'] ?>" readonly>
                                     </div>
                                 <div class="col-12">
                                     <label for="iban" class="form-label">IBAN</label>

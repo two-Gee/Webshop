@@ -96,7 +96,7 @@ if($_POST['login-btn']=='Login'){
         $result=$preparedStatement->get_result();
         $preparedStatement->close();
         $dbconn->close();
-        $sql="SELECT * FROM webshop.kunde WHERE EMail=".$_POST['email'];
+        $sql="SELECT * FROM webshop.kunde WHERE EMail='".$_POST['email']."'";
         $result=db_query($sql);
         $row=$result->fetch_assoc();
         $_SESSION['kundenID'] = $row['kundenID'];
