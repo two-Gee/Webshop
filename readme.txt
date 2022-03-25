@@ -13,7 +13,12 @@ Anleitung Datenbank:
 7. Bei Password: webshop#43
 8. Unter "Datenbank für Benutzerkonto" den Punkt "Gewähre alle Rechte auf die Datenbank webshop auswählen"
 
+Anleitung Webseite:
+1. zip Datei entpacken und Webshop Ordner in /htdocs verschieben
+2. über localhost/Webshop auf Webseite zugreifen
+
 Admin Account der Webseite (um mit Admin Panel Burger hinzufügen zu können und entfernen zu können):
+
 einfach bei Login der Webseite folgende Daten eingeben:
 
 email: admin@admin.de
@@ -32,3 +37,5 @@ FeatureListe:
 - alte Bestellungen ansehen
 - Profil verwalten (Profildaten ändern)
 - Admin Panel (Burger hinzufügen bzw. löschen)
+
+Bei Problemen oder falls etwas nicht funktioniert, schreiben sie mir bitte eine Email: gerrit.graetz@gmail.com
