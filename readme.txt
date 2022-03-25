@@ -3,6 +3,15 @@ Datenbank:
 benutzername= webshop_user
 password = webshop#43
 
+Anleitung Datenbank:
+1. Datenbank erstellen mit dem Namen: webshop
+2. Auf Datenbank klicken und oben in der Leiste auf Importieren klicken
+3. datenbank webshop.sql auswählen und auf OK klicken
+4. Wieder auf webshop Datenbank klicken und oben in der Leiste Rechte auswählen
+5. Bei Rechte auf Benutzerkonto hinzufügen klicken
+6. Bei Benutzername: webshop_user
+7. Bei Password: webshop#43
+8. Unter "Datenbank für Benutzerkonto" den Punkt "Gewähre alle Rechte auf die Datenbank webshop auswählen"
 
 Admin Account der Webseite (um mit Admin Panel Burger hinzufügen zu können und entfernen zu können):
 einfach bei Login der Webseite folgende Daten eingeben:
