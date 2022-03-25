@@ -2,6 +2,7 @@
 include 'db_funktionen.php';
 session_start();
 $dbconn=db_connect();
+//Ändert Profildaten
 if(isset($_SESSION['angemeldet'])){
     $sql = "SELECT * FROM kunde WHERE EMail = ?";
 
@@ -37,6 +38,7 @@ if(isset($_SESSION['angemeldet'])){
                 $geschlecht = "divers";
                 break;
         }
+        //Überprüft ob password geändert werden soll oder nicht
         if(isset($_POST['password'])){
             $sql = "UPDATE webshop.kunde SET vorname=?, nachname=?, geschlecht=?, geburtsdatum=?, Straße=?, Hausnummer=?, PLZ=?, Ort=?, IBAN=?, EMail=?, password=? WHERE kundenID=".$_SESSION['kundenID'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);

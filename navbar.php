@@ -25,7 +25,7 @@ session_start();
         display: block;
     }
 </style>
-
+<!-- Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light rounded border-bottom">
             <a class="navbar-brand" href="index.php">
                 <i class="fa-solid fa-burger"></i>
@@ -66,10 +66,23 @@ session_start();
             </div>
 
             <?php
+            include "db_funktionen.php";
+            if(isset($_SESSION['einkaufswagenID'])) {
+
+
+                $sql = "SELECT count(*) as anzahl FROM webshop.einkaufswageneintrag, webshop.einkaufswagen WHERE einkaufswageneintrag.einkaufswagenID=einkaufswagen.einkaufswagenID AND einkaufswagen.einkaufswagenID=" . $_SESSION['einkaufswagenID'];
+                $result = db_query($sql);
+                $r = $result->fetch_assoc();
+                $anzahl=$r['anzahl'];
+            }else{
+                $anzahl=0;
+            }
+            //Überprüft, ob man angemeldet ist und zeigt entweder Login Button oder Profil.
             if(isset($_SESSION['angemeldet'])){
+                //Überprüft ob, Nutzer Admin Rechte hat und zeigt falls ja Button um zum Admin Bereich zu kommen
                 if(isset($_SESSION['admin'])){
                     echo"
-                        <a  href='admin.php'  class='btn btn-outline-dark btn-round me-3'>
+                        <a  href='admin.php'  class='btn  btn-sm btn-outline-dark btn-round me-3'>
                         Admin
                         </a> 
                     ";
@@ -92,16 +105,13 @@ session_start();
                                     <li><a class='dropdown-item' href='ausloggen.php'>Ausloggen</a></li>                                            
                                 </ul>
                           </div>
-                          <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
+                          <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a><sub id='anzahlsymbol'>".$anzahl."</sub>";
             }else{
                 echo "
-                        <a  href='ausloggen.php'  class='btn btn-outline-dark btn-round me-3 btn-sm '>
-                        neue Session
-                        </a> 
                         <div  onclick='$('#myModal').modal(options)'  class='btn btn-outline-dark btn-round btn-sm' data-bs-toggle='modal' data-bs-target='#loginModal'>
                         Anmelden
                         </div> 
-                        <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a>";
+                        <a class='btn fa-solid fa-cart-shopping' href='einkaufswagen.php'></a><sub id='anzahlsymbol'>".$anzahl."</sub>";
             }
             ?>
         </nav>
@@ -111,12 +121,14 @@ session_start();
                 justify-content: center;
             }
         </style>
+        <!-- Suchleiste -->
         <div class="searchbar">
         <form class="d-flex" action="burgersuchen.php" method="get" style="width: 70%">
             <input class="form-control me-2" type="search" name="suchbegriff" placeholder="Burger suchen" aria-label="Search">
             <button class="btn btn-outline-dark btn-sm" type="submit">suchen</button>
         </form>
         </div>
+        <!-- Anmelden Popup-->
         <div class='modal fade' id='loginModal' tabindex=' -1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered' role='document'>
                 <div class='modal-content'>
@@ -151,6 +163,7 @@ session_start();
 <style>
 
 </style>
+        <!-- Registrieren Popup-->
         <div class='test1 modal fade' id= 'signUpModal' tabindex= '-1' role= 'dialog' aria-labelledby= 'exampleModalLabel' aria-hidden= 'true'>
             <div class='modal-dialog modal-dialog-centered' role= 'document' >
                 <div class='modal-content' >
@@ -213,11 +226,31 @@ session_start();
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script>
+    //zeigt Registrieren Popup
     function signUp(){
         $('#loginModal').modal('hide');
         $(".modal-backdrop").remove();
         $('#signUpModal').modal('show');
     };
+    //Funktion um Pop Up von Anmelden bzw. Registrieren wieder zu schlißen
+    $(document).ready(function (){
+        $('#btnclose1').click(function (){
+            $('#loginModal').modal('hide');
+            $(".modal-backdrop").remove();
+        });
+        $('#btnclose2').click(function (){
+            $('#signUpModal').modal('hide');
+            $(".modal-backdrop").remove();
+        });
+        $(function(){
+            $('#navbarDropdown').hover(function() {
+                    $(this).addClass('open');
+                },
+                function() {
+                    $(this).removeClass('open');
+                });
+        });
+    });
 </script>
 </body>
 </html>

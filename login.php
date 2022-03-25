@@ -19,12 +19,13 @@ session_start();
 <?php
 include 'db_funktionen.php';
 $dbconn=db_connect();
-
+//Überprüft ob man sich einloggen will oder sich registrieren will
 if($_POST['login-btn']=='Login'){
     $sql = "SELECT * FROM kunde WHERE EMail = ?";
 
-    //prepare string against sql Injection
+    //prepare string gegen sql Injection
     $preparedStatement = $dbconn->prepare($sql);
+    //Parameter binden
     $preparedStatement->bind_param('s', $_POST['email']);
     if(!$preparedStatement->execute()){
         die($preparedStatement->error);
@@ -33,6 +34,7 @@ if($_POST['login-btn']=='Login'){
     $preparedStatement->close();
     if($result->num_rows > 0){
         $row=$result->fetch_assoc();
+        //Überprüft ob password richtig ist
         if(password_verify($_POST['password'], $row['Password'])){
             $_SESSION['kundenID'] = $row['kundenID'];
             $_SESSION['angemeldet']=true;
@@ -41,6 +43,7 @@ if($_POST['login-btn']=='Login'){
             $sql="SELECT * FROM webshop.kunde WHERE kundenID=".$_SESSION['kundenID'];
             $result=db_query($sql);
             $r=$result->fetch_assoc();
+            //Überprüft ob Konto Admin Rechte hat
             if($r['admin']==1){
                 $_SESSION['admin']=true;
             }
@@ -108,19 +111,24 @@ if($_POST['login-btn']=='Login'){
     }
 }
 if(isset($_SESSION['kundenID'])) {
+    //Falls bereits Produkte im Warenkorb waren, werden die Zusammengefügt mit denen, die im Konto gespeichert sind
     if (isset($_SESSION['einkaufswagenID']) and isset($_SESSION['kundenID'])) {
         $sql = "SELECT * FROM webshop.einkaufswagen AS e WHERE e.kundenID='" . $_SESSION['kundenID'] . "'";
         $result = db_query($sql);
+        //falls im Konto produkte im einkaufswagen gespeichert sind werden die zusammengefügt
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $sql = "UPDATE webshop.einkaufswageneintrag SET einkaufswagenID=" . $row['einkaufswagenID'] . " WHERE einkaufswagenID=" . $_SESSION['einkaufswagenID'];
             db_query($sql);
             $_SESSION['einkaufswagenID'] = $row['einkaufswagenID'];
-        } else {
+        }
+        //Wenn mit Konto noch kein Einkaufwagen verknüpft war, dann wird der Einkaufswagen aus der Session verknüpft
+        else {
             $sql = "UPDATE webshop.einkaufswagen SET kundenID=" . $_SESSION['kundenID'] . " WHERE einkaufswagenID=" . $_SESSION['einkaufswagenID'];
             db_query($sql);
         }
-    } else {
+    } //Wenn in der Session noch kein Einkaufswagen gespeichert war, dann wird der von dem Kunden genommen
+    else {
         $sql = "SELECT * FROM webshop.einkaufswagen WHERE kundenID=" . $_SESSION['kundenID'];
         $result = db_query($sql);
         if ($result->num_rows > 0) {

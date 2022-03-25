@@ -19,6 +19,7 @@
 <?php
 include 'navbar.php';
 ?>
+<!-- Impressum -->
 <div class="container pt-5 impressum"
 
     <p><strong>Impressum</strong></p>
@@ -32,7 +33,7 @@ include 'navbar.php';
     <p><span style="text-decoration: underline;">Kontaktaufnahme:</span></p>
     <p>&nbsp;</p>
     <p>Telefon: 01573/5562972</p>
-    <p>E-Mail: gerrit.graetz@gmail.com</p>
+    <p>E-Mail: juicyburger@gmail.com</p>
     <p>&nbsp;</p>
     <p><strong>Umsatzsteuer-ID</strong></p>
     <p><span style="text-decoration: underline;">&nbsp;</span></p>

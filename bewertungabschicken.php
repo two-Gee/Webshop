@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-//submit_rating.php
 include 'db_funktionen.php';
 echo $_POST['bewertung'];
 $dbconn=db_connect();
@@ -11,7 +10,7 @@ if (isset($_SESSION["angemeldet"])) {
     }else{
         echo $_POST['bewertung'];
         $datum=date("Y-m-d");
-
+        //Bewertung wird in Datenbank eingefügt
         $sql = "INSERT INTO webshop.bewertung ( bewertung, bewertungstext, datum, kundenID, burgerID) VALUES (?, ?, ?, ?, ?)";
         $prep=$dbconn->prepare($sql);
         $prep->bind_param("sssii", $_POST["bewertung"], $_POST["bewertungstext"],$datum, $_SESSION['kundenID'], $_POST['burgerID'] );

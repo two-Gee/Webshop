@@ -16,10 +16,14 @@ session_start();
 </head>
 <body>
 <?php
+//Fügt Produkte zu Einkaufswagen hinzu oder löscht welche
 include 'db_funktionen.php';
 $dbconn=db_connect();
+//Überprüft ob Produkt hinzufügt oder gelöscht werden soll
 if($_POST['anzahl']>0){
+    //Überprüft ob der Session bereits ein einkaufwagen zugeordnet ist, falls nicht wird eine neuer erstellt
     if(!isset($_SESSION['einkaufswagenID'])) {
+        //Überprüft ob Nutzer angemeldet ist, wenn nicht wird nur die SessionID in der DB gespeichert
         if(isset($_SESSION['angemeldet'])) {
             $sql= "INSERT INTO einkaufswagen (kundenID, sessionID) VALUES ('".$_SESSION['kundenID']."', '".session_id()."') ";
             $dbconn->query($sql);
@@ -57,11 +61,11 @@ if($_POST['anzahl']>0){
                 location.href='index.php'; 
                 </script>";
 }else{
+    //Löscht einen Burger aus der Datenbank heraus
     $sql1 ="SELECT * FROM einkaufswageneintrag WHERE burgerID=".$_POST['burgerID']." AND einkaufswagenID=".$_SESSION['einkaufswagenID']." LIMIT 1";
     $result=db_query($sql1);
     $r=$result->fetch_assoc();
     $sql2 = "DELETE FROM einkaufswageneintrag WHERE einkaufswageneintragID=".$r['einkaufswageneintragID'];
     db_query($sql2);
-    echo "Test";
 }
 ?>

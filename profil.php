@@ -17,7 +17,6 @@
 <body class="bg-light">
 <?php
 include 'navbar.php';
-include 'db_funktionen.php';
 $sql= 'SELECT * FROM webshop.kunde WHERE kundenID=' .$_SESSION['kundenID'];
 $result=db_query($sql);
 $r=$result->fetch_assoc();
@@ -88,8 +87,10 @@ include 'footer.php';
         crossorigin="anonymous"></script>
 
 <script>
-//Funktion um Textfelder entwerder readonly zu haben oder bearbeiten zu können
+//Funktion um Textfelder entweder readonly zu haben oder bearbeiten zu können
     function bearbeiten(){
+        let geschlecht= null;
+        geschlecht="<?php echo $r['geschlecht'] ?>";
         let test=document.getElementById("vorname").getAttribute("readonly");
         var readonly=false;
         if(test==null){
@@ -107,12 +108,17 @@ include 'footer.php';
             document.getElementById("password").setAttribute("readonly", readonly);
             document.getElementById("buttonaendern").innerHTML="";
         }else{
-
             document.getElementById("nachname").removeAttribute("readonly");
             document.getElementById("vorname").removeAttribute("readonly");
             document.getElementById("geburtsdatum").removeAttribute("readonly");
             document.getElementById("straße").removeAttribute("readonly");
-            document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='2'>Männlich</option> <option value='3'>Divers</option> </select>";
+            if( geschlecht ==="männlich"){
+                document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='2' selected>Männlich</option> <option value='3'>Divers</option> </select>";
+            }else if(geschlecht==="weiblich"){
+                document.getElementById("geschlechtdiv").innerHTML="<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1' selected>Weiblich</option> <option value='2'>Männlich</option> <option value='3'>Divers</option> </select>";
+            }else if(geschlecht==="divers"){
+                document.getElementById("geschlechtdiv").innerHTML = "<label for='geschlecht' class='form-label'>Geschlecht</label><select id='geschlecht' name='geschlecht' class='form-select'> <option value='1'>Weiblich</option> <option value='2'>Männlich</option> <option value='3' selected>Divers</option> </select>";
+            }
             document.getElementById("hausnummer").removeAttribute("readonly");
             document.getElementById("plz").removeAttribute("readonly");
             document.getElementById("iban").removeAttribute("readonly");

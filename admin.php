@@ -18,14 +18,14 @@
 <body class="bg-light">
 <?php
 include ('navbar.php');
-include 'db_funktionen.php';
+//falls Konto keine Admin Rechte hat, kann man nicht auf Seite zugreifen
 if(!isset($_SESSION['admin'])){
     echo "<script> 
             history.back();
             </script>";
 }
 ?>
-
+<!--Formular um einen neuen Burger hinzuzufügen-->
 <div class ="container mt-4">
     <div class="row">
         <div class="col-sm">
@@ -58,6 +58,7 @@ if(!isset($_SESSION['admin'])){
         <div class="col-sm ps-4">
             <h2 class="text-center">Burger entfernen</h2>
             <div>
+                <!-- Formular um Burger zu löschen. Es werden alle Burger aufgelistet und man kann über eine Checkbox auswählen, welche gelöscht werden sollen-->
                 <form action="burgerloeschen.php" method="post">
                 <?php
                 $sql="SELECT * FROM webshop.burger";

@@ -2,6 +2,7 @@
 include 'db_funktionen.php';
 $dbconn=db_connect();
 session_start();
+//neuen Burger in Datenbank hinzufügen
 if(isset($_SESSION['admin'])){
     $ziel="bilder/";
     $zieldatei=$ziel.basename($_FILES["bild"]['name']);

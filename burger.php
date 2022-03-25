@@ -15,10 +15,11 @@
 
     </style>
 </head>
+<!-- Die Burger werden ausgegeben, entweder alle oder nur bestimmte Kategorien-->
 <body class="bg-light">
 <?php
 include ('navbar.php');
-include 'db_funktionen.php';
+//Überprüfung ob alle Burger ausgegeben werden sollen
 if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
 
 }elseif($_GET['burger']=='beef' OR$_GET['burger']=='chicken'OR $_GET['burger']=='veggie'){
@@ -33,6 +34,7 @@ if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
                 $kategorie = 3;
             }
     $result = db_query("Select * FROM webshop.kategorie WHERE kategorieID=".$kategorie);
+            //Ausgabe der Kategorie Bezeichnung und Beschreibung
             $r=$result->fetch_assoc();
             echo"
             <div class='text-center py-4'>
@@ -47,6 +49,7 @@ if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
 <div class ="container mt-4">
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <?php
+        //Überprüfung ob alle Burger oder nur eine bestimmte Kategorie ausgeben werden soll
         if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
             $_GET['burger']=null;
             $result=db_query("Select * FROM burger");
@@ -75,8 +78,6 @@ if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
                 }
                 // Free result set
                 $result->free_result();
-            } else{
-                echo "No records matching your query were found.";
             }
         }elseif($_GET['burger']=='beef' OR$_GET['burger']=='chicken'OR $_GET['burger']=='veggie') {
 
@@ -108,8 +109,6 @@ if (!isset($_GET['burger']) OR $_GET['burger']=='alle'){
                 }
                 // Free result set
                 $result->free_result();
-            } else {
-                echo "No records matching your query were found.";
             }
         }else{
             echo "<script>alert('Ungültige Kategorie')</script>";
@@ -125,15 +124,9 @@ include "footer.php";
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="einkaufswagen.js"></script>
 <script>
-    function burgerHinzufuegen(burgerID) {
-        var burgerID=burgerID;
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "einkaufswagenverwalten.php");
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send("burgerID="+burgerID+"&anzahl=1");
 
-    }
 </script>
 </body>
 </html>

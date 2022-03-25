@@ -18,11 +18,11 @@
 <body class="bg-light">
 <?php
 include ('navbar.php');
-include 'db_funktionen.php';
 ?>
 
 <div class ="container mt-4">
     <div class="row row-cols-1 row-cols-md-2 g-4">
+        <!-- Gibt alle Burger aus, die dem Suchbegriff entsprechen-->
         <?php
             $result=db_query("Select * FROM burger WHERE LOWER(bezeichnung) LIKE LOWER('%".$_GET['suchbegriff']."%')");
             if($result->num_rows > 0){
@@ -48,10 +48,10 @@ include 'db_funktionen.php';
                             </div>";
 
                 }
-                // Free result set
+
                 $result->free_result();
             } else{
-                echo "Keine Burger gefunden, die zu Ihrer suche passen";
+                echo "<p class='text-center pt-3'>Keine Burger gefunden, die zu Ihrer suche passen</p>";
             }
         ?>
     </div>

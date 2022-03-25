@@ -17,8 +17,8 @@
 include 'navbar.php';
 ?>
 <div class="container">
+    <!-- Ausgabe von den Burgerdetails-->
     <?php
-    include 'db_funktionen.php';
     if(isset($_GET['burgerID'])) {
         $burgerID = $_GET['burgerID'];
         $sql = "SELECT *  FROM webshop.burger WHERE burgerID=" . $burgerID;
@@ -48,11 +48,13 @@ include 'navbar.php';
         }
     }
     ?>
+    <!--Bewertungen zu dem Burger-->
     <div class='row mt-5 text-center'>
         <h2 class='text-center'>Bewertungen:</h2>
         <div class='col-sm'>
             <h5>Bewertung hinzufügen</h5>
             <h4 class="text-center mt-2 mb-4">
+                <!-- Form um Burger zu Bewerten-->
                 <form action="bewertungabschicken.php" method="post" name="Formular">
                     <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
                     <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
@@ -76,6 +78,7 @@ include 'navbar.php';
         $r=$result->fetch_assoc();
         $avgbewertung=round($r['avg']);
         ?>
+        <!-- Ausgabe von durchschnittlicher Bewertung und anzahl an Bewertungen-->
         <div class='col-sm text-center pt-3'>
             <div class="">
                 <div class="card mx-5">
@@ -110,10 +113,15 @@ include 'navbar.php';
         </div>
 
     </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+
         <?php
+        //Abrufen von max. 6 Bewertungen zu dem Produkt aus der Datenbank
         $sql="SELECT * FROM webshop.bewertung, webshop.kunde WHERE bewertung.kundenID=kunde.kundenID AND burgerID=".$_GET['burgerID']." LIMIT 6";
         $result=db_query($sql);
+        if($result->num_rows<1){
+            echo "<p class='text-center mt-5'>Noch keine Bewertungen</p>";
+        }
+        echo "<div class='row row-cols-1 row-cols-md-2 g-4 mt-5'>";
         while($row=$result->fetch_assoc()){
             echo "
                         <div class='mt-3'>
@@ -150,18 +158,6 @@ include 'footer.php';
 ?>
 
 <style>
-    .progress-label-left
-    {
-        float: left;
-        margin-right: 0.5em;
-        line-height: 1em;
-    }
-    .progress-label-right
-    {
-        float: right;
-        margin-left: 0.3em;
-        line-height: 1em;
-    }
     .star-light
     {
         color:#e9ecef;
@@ -172,7 +168,9 @@ include 'footer.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script src="einkaufswagen.js"></script>
 <script>
+    //Javascript ließt aus wie viele Sterne ausgewählt sind und verändert dementsprechend welche golden erscheinen.
     $(document).ready(function() {
 
         var rating_data = 0;

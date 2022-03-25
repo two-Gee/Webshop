@@ -22,13 +22,15 @@ include 'navbar.php';
         <div class="row">
             <div class='col-sm'>
             <?php
-            include 'db_funktionen.php';
             $gesamtpreis=0.0;
                 if(isset($_SESSION['einkaufswagenID'])) {
+                    //Abrufen von allen Burgern aus der Datenbank, die im zugeordneten Warenkorb gespeichert sind
                     $result = db_query("SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b WHERE e.burgerID=b.burgerID AND einkaufswagenID='".$_SESSION['einkaufswagenID']."' GROUP BY b.bezeichnung");
                     while ($row = $result->fetch_assoc()) {
+                        //Berechnung von Gesamtpreis aller Produkte ime Warenkorb
                         $gesamtpreis=$gesamtpreis+$row['anzahl']*$row['preis'];
-
+                        //Auflistung von allen Produkten im Warenkorb
+                        // Mit plus und minus Symbol kann die Anzahl der einzelen Produkte verändert werden
                         echo " 
                         <div class='row border-bottom my-2 pb-2'>
                             <div class='col'>
@@ -98,33 +100,9 @@ include 'footer.php';
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="einkaufswagen.js"></script>
 <script>
-    function anzahlAendern(id, anzahlHinzufuegen, preis) {
-        var id=id;
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "einkaufswagenverwalten.php");
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send("burgerID="+id+"&anzahl="+anzahlHinzufuegen);
-        var anzahl=parseInt(document.getElementById(id).innerHTML);
-        var gesamtpreis=parseFloat(document.getElementById("gesamtpreis").innerHTML);
-        var neueanzahl=anzahl+anzahlHinzufuegen;
-        if(anzahlHinzufuegen>0){
-            let neuerPreis=gesamtpreis+preis;
-            document.getElementById("gesamtpreis").innerHTML = neuerPreis;
-        }else{
-            document.getElementById("gesamtpreis").innerHTML = gesamtpreis-preis;
-        }
 
-        if(neueanzahl<=0){
-            location.reload();
-        }else {
-            document.getElementById(id).innerHTML = neueanzahl;
-        }
-    }
-    function reload(){
-        location.reload;
-    }
 </script>
 </body>
 </html>

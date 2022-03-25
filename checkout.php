@@ -27,6 +27,7 @@ session_start();
     if(isset($_SESSION['einkaufswagenID'])) {
         $result = db_query("SELECT b.burgerID AS burgerID, b.preis AS preis, b.bild AS bild, b.bezeichnung AS bezeichnung, COUNT(b.bezeichnung) AS anzahl FROM webshop.einkaufswageneintrag AS e, webshop.burger AS b WHERE e.burgerID=b.burgerID AND einkaufswagenID='" . $_SESSION['einkaufswagenID'] . "' GROUP BY b.bezeichnung");
         while ($row = $result->fetch_assoc()) {
+            //Berechnung von Gesamtpreis
             $gesamtpreis = $gesamtpreis + $row['anzahl'] * $row['preis'];
         }
     }
@@ -38,6 +39,7 @@ session_start();
     ?>
                         <div class='row'>
                             <div class="col-sm mt-5">
+                                <!-- Rechnungsadresse-->
                                 <h5>Rechnungsadresse</h5>
                                 <form class="row g-3">
                                     <div class="col-md-6">
@@ -69,6 +71,8 @@ session_start();
                                     <input type="text" class="form-control" id="iban" value="<?php echo $r['IBAN'] ?>"readonly>
                                 </div>
                                 </form>
+                                <!-- Lieferadresse-->
+                                <!-- Nur Lieferadresse soll verändert werden können, da Rechnungsadresse mit Kontodaten übereinstimmen soll-->
                                 <h5 class="pt-5">Lieferadresse <i class="fa-solid fa-pen-to-square" id="button" onclick="bearbeiten()"></i></h5>
                                 <form class="row g-3" action="rechnungerstellen.php" method="post">
                                     <div class="col-md-6">
@@ -97,6 +101,7 @@ session_start();
                                     </div>
 
                             </div>
+                            <!-- Ausgabe von Gesamtpreis-->
                             <div class='col-sm pt-5'>
                                 <div class="text-center border mt-5 pt-2 shadow mx-5 rounded" style="background-color: gainsboro">
                                     <p>
@@ -143,6 +148,7 @@ session_start();
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script>
+    // Funktion um Lieferadresse bearbeiten zu können
     function bearbeiten(){
         let test=document.getElementById("vornamel").getAttribute("readonly");
         let readonly = false;

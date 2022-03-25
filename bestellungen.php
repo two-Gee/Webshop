@@ -20,7 +20,7 @@ include 'navbar.php';
 ?>
 <div class="container pt-5">
     <?php
-    include 'db_funktionen.php';
+    //Auflistung von allen Bestellungen, die dem angemeldeten Konto zugeordnet sind, sortiert nach Bestelldatum und Zeit.
     $sql="SELECT * FROM webshop.rechnung WHERE kundenID=".$_SESSION['kundenID']." ORDER BY datum DESC, uhrzeit DESC";
     $result=db_query($sql);
     if($result->num_rows<1){
